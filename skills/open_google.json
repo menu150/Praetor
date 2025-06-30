@@ -1,0 +1,5 @@
+{
+  "triggers": ["open google"],
+  "action": "subprocess",
+  "path_or_command": "firefox --new-window https://www.google.com"
+}

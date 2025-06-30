@@ -1,0 +1,4 @@
+timestamp: 2025-06-20_14-33-37
+transcription: [00:00:00.000 --> 00:00:02.000]   reboot system.
+label: 
+audio_file: /home/menu150/praetor/logs/audio_2025-06-20_14-33-37.wav

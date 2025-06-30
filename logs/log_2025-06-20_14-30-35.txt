@@ -1,0 +1,4 @@
+timestamp: 2025-06-20_14-30-35
+transcription: [00:00:00.000 --> 00:00:05.200]   Make a note to take out the trash.
+label: 
+audio_file: /home/menu150/praetor/logs/audio_2025-06-20_14-30-35.wav

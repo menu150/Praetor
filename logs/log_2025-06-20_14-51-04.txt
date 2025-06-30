@@ -1,0 +1,4 @@
+timestamp: 2025-06-20_14-51-04
+transcription: [00:00:00.000 --> 00:00:00.500]   Bye.
+label: [❓] Command not recognized.
+audio_file: /home/menu150/praetor/logs/audio_2025-06-20_14-51-04.wav

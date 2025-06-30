@@ -1,0 +1,7 @@
+{
+  "triggers": [
+    "send report to me"
+  ],
+  "action": "system",
+  "path_or_command": "echo \\\"Report body\\\" | mail -s \\\"Your Report\\\" you@example.com"
+}

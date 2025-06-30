@@ -1,0 +1,6 @@
+/home/menu150/praetor/listen.py: line 1: import: command not found
+/home/menu150/praetor/listen.py: line 2: import: command not found
+/home/menu150/praetor/listen.py: line 3: import: command not found
+/home/menu150/praetor/listen.py: line 4: import: command not found
+/home/menu150/praetor/listen.py: line 6: syntax error near unexpected token `('
+/home/menu150/praetor/listen.py: line 6: `porcupine = pvporcupine.create('

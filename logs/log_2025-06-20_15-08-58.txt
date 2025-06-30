@@ -1,0 +1,4 @@
+timestamp: 2025-06-20_15-08-58
+transcription: [00:00:00.000 --> 00:00:03.600]   reboot system.
+label: [❓] Command not recognized.
+audio_file: /home/menu150/praetor/logs/audio_2025-06-20_15-08-58.wav

@@ -1,0 +1,4 @@
+timestamp: 2025-06-20_14-32-05
+transcription: [00:00:00.000 --> 00:00:03.040]   Eat chittin' dah, eat chittin' dah, my friend.
+label: 
+audio_file: /home/menu150/praetor/logs/audio_2025-06-20_14-32-05.wav

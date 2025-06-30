@@ -1,0 +1,4 @@
+timestamp: 2025-06-20_15-17-05
+transcription: 
+label: [❓] Command not recognized.
+audio_file: /home/menu150/praetor/logs/audio_2025-06-20_15-17-05.wav

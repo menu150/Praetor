@@ -1,0 +1,7 @@
+{
+  "triggers": [
+    "open calculator"
+  ],
+  "action": "system",
+  "path_or_command": "gnome-calculator"
+}
