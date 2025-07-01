@@ -3,7 +3,7 @@ import io
 import sys
 import pkgutil
 import importlib
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, redirect
 from flask_httpauth import HTTPTokenAuth
 from dotenv import load_dotenv
 from flasgger import Swagger
@@ -23,49 +23,18 @@ auth = HTTPTokenAuth(scheme="ApiKey")
 def verify_token(token):
     return token == API_KEY
 
+@app.route("/", methods=["GET"])
+def home():
+    return redirect("/apidocs/")
+
 # Import brain and train_skill modules
 import brain
 import train_skill
 
-# Command endpoint
+# Ad-hoc command endpoint
 @app.route('/command', methods=['POST'])
 @auth.login_required
 def command():
-    """
-    Handle an ad-hoc command via brain.handle_command
-    ---
-    post:
-      summary: Execute a plain-text command
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                command:
-                  type: string
-              required:
-                - command
-      responses:
-        200:
-          description: Command output
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  response:
-                    type: array
-                    items:
-                      type: string
-        400:
-          description: Missing 'command' field
-        401:
-          description: Unauthorized
-        500:
-          description: Internal server error
-    """
     data = request.get_json(force=True, silent=True)
     if not data or 'command' not in data:
         return jsonify(error="Provide JSON with a 'command' field"), 400
@@ -82,46 +51,10 @@ def command():
 
     return jsonify(response=buf.getvalue().splitlines())
 
-# Teach endpoint
+# Teaching endpoint
 @app.route('/teach', methods=['POST'])
 @auth.login_required
 def teach():
-    """
-    Teach a new trigger-command mapping via train_skill.run
-    ---
-    post:
-      summary: Teach a new skill
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                trigger:
-                  type: string
-                command:
-                  type: string
-              required:
-                - trigger
-                - command
-      responses:
-        200:
-          description: Training result
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  result:
-                    type: string
-        400:
-          description: Missing fields
-        401:
-          description: Unauthorized
-        500:
-          description: Training failed
-    """
     data = request.get_json(force=True, silent=True)
     if not data or 'trigger' not in data or 'command' not in data:
         return jsonify(error="Provide JSON with 'trigger' and 'command' fields"), 400
@@ -134,43 +67,55 @@ def teach():
 
     return jsonify(result=result)
 
-# List skills endpoint
+# List available skills triggers
 @app.route('/skills', methods=['GET'])
 @auth.login_required
 def list_skills():
-    """
-    List all available skill triggers
-    ---
-    get:
-      summary: List loaded commands
-      responses:
-        200:
-          description: List of triggers
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  skills:
-                    type: array
-                    items:
-                      type: string
-        401:
-          description: Unauthorized
-    """
-    # Combine JSON/DB triggers and dynamic module-based skills
     json_trigs = sorted(brain.COMMANDS.keys()) if hasattr(brain, 'COMMANDS') else []
     module_trigs = []
-    # dynamic import from skills/ if needed
     try:
         from skills import __path__ as skills_path
         for finder, name, ispkg in pkgutil.iter_modules(skills_path):
             module_trigs.append(name)
     except ImportError:
         pass
-
     all_skills = sorted(set(json_trigs + module_trigs))
     return jsonify(skills=all_skills)
+
+# --- Dynamic skill loader --------------------------------------------------
+skills = {}
+from skills import __path__ as skills_path
+for finder, name, ispkg in pkgutil.iter_modules(skills_path):
+    if ispkg:
+        try:
+            module = importlib.import_module(f"skills.{name}.orchestrator")
+        except ImportError:
+            continue
+    else:
+        module = importlib.import_module(f"skills.{name}")
+    if hasattr(module, "run"):
+        skills[name] = module.run
+
+# --- Intent endpoint -------------------------------------------------------
+@app.route("/api/intent", methods=["POST"])
+@auth.login_required
+def intent_endpoint():
+    data = request.get_json(force=True, silent=True)
+    if not data or "intent" not in data:
+        return jsonify(error="Provide JSON with an 'intent' field"), 400
+
+    intent = data["intent"]
+    params = data.get("params", {})
+
+    handler = skills.get(intent)
+    if not handler:
+        return jsonify(error=f"Unknown intent '{intent}'"), 404
+
+    try:
+        result = handler(**params)
+        return jsonify(status="ok", intent=intent, response=result)
+    except Exception as e:
+        return jsonify(status="error", error=str(e)), 500
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

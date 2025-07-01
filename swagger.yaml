@@ -1,11 +1,12 @@
 # ~/praetor/swagger.yaml
-openapi: 3.0.0
+swagger: "2.0"
 info:
   title: Praetor API
   version: 1.0.0
-servers:
-  - url: http://localhost:5000
-    description: Local development server
+host: localhost:5000
+basePath: /
+schemes:
+ -http
 
 paths:
   /api/intent:
