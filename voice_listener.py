@@ -2,6 +2,7 @@ import pvporcupine
 import pyaudio
 import struct
 import subprocess
+import os
 
 porcupine = pvporcupine.create(keywords=["computer"])  # We'll customize this next
 
@@ -23,8 +24,10 @@ try:
 
         if porcupine.process(pcm) >= 0:
             print("👂 Wake word detected!")
-            subprocess.run(["aplay", "~/praetor/chime.wav"], shell=True)
-            subprocess.run(["bash", "~/praetor/language.sh"], shell=True)
+            chime = os.path.expanduser("~/praetor/chime.wav")
+            script = os.path.expanduser("~/praetor/language.sh")
+            subprocess.run(["aplay", chime], check=True)
+            subprocess.run(["bash", script], check=True)
 
 except KeyboardInterrupt:
     print("Stopping listener.")
