@@ -1,13 +1,12 @@
-import '../styles/globals.css'
-
-export const metadata = {
-  title: 'Dashboard',
-}
+import './globals.css';
+import Layout from './components/Layout';
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Layout>{children}</Layout>
+      </body>
     </html>
-  )
+  );
 }

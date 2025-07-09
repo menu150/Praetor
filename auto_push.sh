@@ -7,6 +7,9 @@ cd ~/praetor
 # Make sure we’re on the right branch
 git checkout main
 
+# Pull latest changes first to avoid remote conflicts
+git pull --rebase origin main
+
 # If there are any changes, commit & push
 if ! git diff-index --quiet HEAD --; then
   git add -A

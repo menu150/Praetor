@@ -3,6 +3,7 @@ import pyaudio
 import struct
 import subprocess
 import os
+import signal  # (in case remote added clean shutdown logic)
 
 porcupine = pvporcupine.create(keywords=["computer"])  # We'll customize this next
 
@@ -16,6 +17,16 @@ stream = pa.open(
 )
 
 print("🎧 Praetor is now always listening...")
+
+def shutdown_handler(signum, frame):
+    print("Received shutdown signal.")
+    stream.stop_stream()
+    stream.close()
+    pa.terminate()
+    exit(0)
+
+signal.signal(signal.SIGINT, shutdown_handler)
+signal.signal(signal.SIGTERM, shutdown_handler)
 
 try:
     while True:
@@ -35,4 +46,3 @@ finally:
     stream.stop_stream()
     stream.close()
     pa.terminate()
-    porcupine.delete()
