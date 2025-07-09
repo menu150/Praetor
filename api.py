@@ -5,6 +5,7 @@ import pkgutil
 import importlib
 from flask import Flask, request, jsonify, redirect
 from flask_httpauth import HTTPTokenAuth
+from flask_cors import CORS
 from dotenv import load_dotenv
 from flasgger import Swagger
 
@@ -14,10 +15,11 @@ API_KEY = os.getenv("PRAETOR_API_KEY")
 if not API_KEY:
     raise RuntimeError("PRAETOR_API_KEY missing in .env")
 
-# Initialize Flask, Swagger, and Auth
+# Initialize Flask, Swagger, Auth, and CORS
 app = Flask(__name__)
 swagger = Swagger(app, template_file='swagger.yaml')
 auth = HTTPTokenAuth(scheme="ApiKey")
+CORS(app)
 
 @auth.verify_token
 def verify_token(token):
@@ -27,11 +29,31 @@ def verify_token(token):
 def home():
     return redirect("/apidocs/")
 
-# Import brain and train_skill modules
+# Import core logic
 import brain
 import train_skill
 
-# Ad-hoc command endpoint
+# Route: Universal chat endpoint for web interface
+@app.route("/api/praetor/chat", methods=["POST"])
+@auth.login_required
+def praetor_chat():
+    data = request.get_json(force=True, silent=True)
+    user_input = data.get("message", "")
+
+    if not user_input:
+        return jsonify(error="No message provided"), 400
+
+    try:
+        buffer, old_stdout = io.StringIO(), sys.stdout
+        sys.stdout = buffer
+        brain.handle_command(user_input)
+        sys.stdout = old_stdout
+        return jsonify(response=buffer.getvalue().strip())
+    except Exception as e:
+        sys.stdout = old_stdout
+        return jsonify(error=str(e)), 500
+
+# Route: Ad-hoc command
 @app.route('/command', methods=['POST'])
 @auth.login_required
 def command():
@@ -39,19 +61,17 @@ def command():
     if not data or 'command' not in data:
         return jsonify(error="Provide JSON with a 'command' field"), 400
 
-    buf, old_stdout = io.StringIO(), sys.stdout
-    sys.stdout = buf
     try:
+        buffer, old_stdout = io.StringIO(), sys.stdout
+        sys.stdout = buffer
         brain.handle_command(data['command'])
+        sys.stdout = old_stdout
+        return jsonify(response=buffer.getvalue().splitlines())
     except Exception as e:
         sys.stdout = old_stdout
         return jsonify(error=str(e)), 500
-    finally:
-        sys.stdout = old_stdout
 
-    return jsonify(response=buf.getvalue().splitlines())
-
-# Teaching endpoint
+# Route: Teaching new skills
 @app.route('/teach', methods=['POST'])
 @auth.login_required
 def teach():
@@ -59,15 +79,14 @@ def teach():
     if not data or 'trigger' not in data or 'command' not in data:
         return jsonify(error="Provide JSON with 'trigger' and 'command' fields"), 400
 
-    teach_input = f"teach '{data['trigger']}' runs '{data['command']}'"
     try:
+        teach_input = f"teach '{data['trigger']}' runs '{data['command']}'"
         result = train_skill.run(teach_input)
+        return jsonify(result=result)
     except Exception as e:
         return jsonify(error=f"Training failed: {e}"), 500
 
-    return jsonify(result=result)
-
-# List available skills triggers
+# Route: List available skills
 @app.route('/skills', methods=['GET'])
 @auth.login_required
 def list_skills():
@@ -82,21 +101,19 @@ def list_skills():
     all_skills = sorted(set(json_trigs + module_trigs))
     return jsonify(skills=all_skills)
 
-# --- Dynamic skill loader --------------------------------------------------
+# Load dynamic skills
 skills = {}
 from skills import __path__ as skills_path
 for finder, name, ispkg in pkgutil.iter_modules(skills_path):
-    if ispkg:
-        try:
-            module = importlib.import_module(f"skills.{name}.orchestrator")
-        except ImportError:
-            continue
-    else:
-        module = importlib.import_module(f"skills.{name}")
-    if hasattr(module, "run"):
-        skills[name] = module.run
+    try:
+        module_path = f"skills.{name}.orchestrator" if ispkg else f"skills.{name}"
+        module = importlib.import_module(module_path)
+        if hasattr(module, "run"):
+            skills[name] = module.run
+    except ImportError:
+        continue
 
-# --- Intent endpoint -------------------------------------------------------
+# Route: Intent-based API
 @app.route("/api/intent", methods=["POST"])
 @auth.login_required
 def intent_endpoint():
@@ -106,8 +123,8 @@ def intent_endpoint():
 
     intent = data["intent"]
     params = data.get("params", {})
-
     handler = skills.get(intent)
+
     if not handler:
         return jsonify(error=f"Unknown intent '{intent}'"), 404
 
