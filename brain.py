@@ -24,14 +24,9 @@ TRIGGER_EMBEDDINGS = {}
 from subprocess import DEVNULL
 
 def load_skills(skill_dir="skills"):
-    """
-    Load skills from JSON files and persistent DB into SKILL_LIST and COMMANDS,
-    then build embeddings for each trigger.
-    """
     SKILL_LIST.clear()
     COMMANDS.clear()
 
-    # 1) Load from filesystem
     if os.path.isdir(skill_dir):
         for filename in os.listdir(skill_dir):
             if filename.endswith(".json"):
@@ -48,13 +43,11 @@ def load_skills(skill_dir="skills"):
                 except Exception as e:
                     print(f"[⚠️] Failed to load {filename}: {e}")
 
-    # 2) Load from persistent DB
     for trig, action, cmd in memory.load_all_skills(conn):
         skill = {"triggers": [trig], "action": action, "path_or_command": cmd}
         SKILL_LIST.append(skill)
         COMMANDS[trig] = {"action": action, "path_or_command": cmd}
 
-    # 3) Build/refresh embeddings for fuzzy matching
     for trig in COMMANDS:
         if trig not in TRIGGER_EMBEDDINGS:
             try:
@@ -68,9 +61,6 @@ def load_skills(skill_dir="skills"):
                 print(f"[⚠️] Embedding error for '{trig}': {e}")
 
 def load_py_skills(pkg_dir="skills_py"):
-    """
-    Dynamically import Python skill modules and register their triggers.
-    """
     for _, name, _ in pkgutil.iter_modules([pkg_dir]):
         try:
             module = importlib.import_module(f"{pkg_dir}.{name}")
@@ -83,9 +73,6 @@ def load_py_skills(pkg_dir="skills_py"):
             print(f"[⚠️] Failed to load Python skill '{name}': {e}")
 
 def build_system_prompt():
-    """
-    Build the system prompt listing all loaded skills for GPT routing.
-    """
     prompt = (
         "You are Praetor, an intelligent AI brain that routes user commands to available system actions.\n\n"
         "Available JSON/DB skills:\n"
@@ -105,9 +92,6 @@ def build_system_prompt():
     return prompt
 
 def get_gpt_actions(user_input):
-    """
-    Use GPT to interpret user input into a list of actions.
-    """
     system_prompt = build_system_prompt()
     messages = [
         {"role": "system", "content": system_prompt},
@@ -124,7 +108,6 @@ def get_gpt_actions(user_input):
         print(f"[⚠️] GPT error: {e}")
         return []
 
-    # Strip Markdown fences and parse JSON
     cleaned = content.strip().lstrip("```json").rstrip("```").strip()
     try:
         result = json.loads(cleaned)
@@ -133,32 +116,7 @@ def get_gpt_actions(user_input):
         print(f"[⚠️] Failed to parse GPT JSON: {cleaned}")
         return []
 
-def find_best_trigger(user_input, threshold=0.75):
-    """
-    Find the closest matching trigger via cosine similarity of embeddings.
-    """
-    try:
-        resp = openai.embeddings.create(
-            model="text-embedding-3-small",
-            input=user_input.lower()
-        )
-        inp_vec = np.array(resp.data[0].embedding)
-    except Exception as e:
-        return None
-
-    best_trig, best_score = None, -1.0
-    for trig, vec in TRIGGER_EMBEDDINGS.items():
-        score = float(np.dot(inp_vec, vec) /
-                      (np.linalg.norm(inp_vec) * np.linalg.norm(vec)))
-        if score > best_score:
-            best_trig, best_score = trig, score
-
-    return best_trig if best_score >= threshold else None
-
 def execute_action(action_cfg):
-    """
-    Execute a single action dict.
-    """
     action = action_cfg.get("action")
     path = action_cfg.get("path_or_command", "")
     print(f"[⚙️] Executing '{action}' -> '{path}'")
@@ -182,33 +140,7 @@ def execute_action(action_cfg):
         print(f"[⚠️] Execution error: {e}")
 
 def handle_command(user_input):
-    """
-    Route and execute user commands: Python skills → JSON/DB → fuzzy → GPT.
-    """
-    text = user_input.strip().lower()
-    actions = []
-
-    # 1) Python skills (prefix match)
-    for trigger, runner in PY_SKILL_RUNNERS.items():
-        if text.startswith(trigger):
-            result = runner(user_input)
-            actions = result if isinstance(result, list) else [result]
-            break
-
-    # 2) Static JSON/DB skills (exact match)
-    if not actions and text in COMMANDS:
-        actions = [COMMANDS[text]]
-
-    # 3) Fuzzy match on JSON/DB triggers
-    if not actions:
-        best = find_best_trigger(user_input)
-        if best:
-            actions = [COMMANDS[best]]
-
-    # 4) Fallback to GPT
-    if not actions:
-        actions = get_gpt_actions(user_input)
-
+    actions = get_gpt_actions(user_input)
     if not actions:
         print("[❓] No actions returned.")
         return
@@ -217,9 +149,6 @@ def handle_command(user_input):
         execute_action(act)
 
 def chat_mode():
-    """
-    Interactive chat loop.
-    """
     print("[💬] Praetor Chat Mode. Type 'exit' to quit.")
     while True:
         try:
