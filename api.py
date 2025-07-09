@@ -135,4 +135,5 @@ def intent_endpoint():
         return jsonify(status="error", error=str(e)), 500
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    port = int(os.getenv("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
