@@ -148,24 +148,7 @@ def handle_command(user_input):
     for act in actions:
         execute_action(act)
 
-def chat_mode():
-    print("[💬] Praetor Chat Mode. Type 'exit' to quit.")
-    while True:
-        try:
-            user_input = input("🧠> ")
-            if user_input.lower() in ["exit", "quit"]:
-                print("[👋] Goodbye.")
-                break
-            handle_command(user_input)
-        except KeyboardInterrupt:
-            print("\n[👋] Interrupted. Exiting.")
-            break
-
 if __name__ == "__main__":
     load_skills()
     load_py_skills()
-
-    if "--chat" in sys.argv or len(sys.argv) == 1:
-        chat_mode()
-    else:
-        handle_command(sys.argv[1])
+    print("[✅] Brain module loaded. Use the Flask API to interact with Praetor.")
