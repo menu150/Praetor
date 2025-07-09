@@ -2,6 +2,7 @@ import os
 import sys
 import json
 import subprocess
+import shlex
 import importlib
 import pkgutil
 from datetime import datetime
@@ -167,15 +168,18 @@ def execute_action(action_cfg):
             now = datetime.now().strftime("%H:%M")
             print(f"[⏰] Current time: {now}")
         elif action == "subprocess":
+            # Split command safely and expand user home for robust execution
+            cmd_parts = shlex.split(os.path.expanduser(path))
             subprocess.Popen(
-                path.split(),
+                cmd_parts,
                 stdout=DEVNULL,
                 stderr=DEVNULL
             )
         elif action == "system":
             subprocess.run(path, shell=True, check=True)
         elif action == "script":
-            subprocess.run(["bash", path], check=True)
+            script_path = os.path.expanduser(path)
+            subprocess.run(["bash", script_path], check=True)
         else:
             print(f"[❌] Unknown action '{action}'")
     except Exception as e:
