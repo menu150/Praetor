@@ -9,7 +9,7 @@ from datetime import datetime
 import openai
 import numpy as np
 
-import memory
+import memory_core as memory
 from brain_state import COMMANDS, PY_SKILL_RUNNERS, SKILL_LIST
 
 # Initialize OpenAI API key

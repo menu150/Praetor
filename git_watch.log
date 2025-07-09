@@ -1,0 +1,7 @@
+nohup: ignoring input
+📡 Git Watch Daemon started at Wed Jul  9 04:02:17 PM CDT 2025
+Setting up watches.  Beware: since -r was given, this may take a while!
+Watches established.
+🔄 Change detected: README.md (MODIFY)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
