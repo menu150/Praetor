@@ -21828,3 +21828,17 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 🔄 Change detected: interception-route-rewrite-manifest.js.tmp.bl66rvvfq0e (MODIFY)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main fffea1b] Real-time update: 2025-07-09 22:44:49
+ 1 file changed, 14 insertions(+)
+To https://github.com/menu150/praetor.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/menu150/praetor.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+✅ Git push complete.
+🔄 Change detected: _buildManifest.js.tmp.xytbd2sp5dm (CREATE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
