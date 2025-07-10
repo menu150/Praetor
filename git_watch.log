@@ -134468,3 +134468,13 @@ To https://github.com/menu150/praetor.git
 🔄 Change detected: .dev.sh.swp (MODIFY)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main f0aff4c5] Real-time update: 2025-07-09 23:45:29
+ 1 file changed, 10 insertions(+)
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+   ae59f051..8132e255  main -> main
+✅ Git push complete.
+🔄 Change detected: .dev.sh.swp (DELETE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
