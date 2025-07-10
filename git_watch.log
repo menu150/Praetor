@@ -8005,3 +8005,14 @@ To https://github.com/menu150/praetor.git
 🔄 Change detected: .chat.jsx.swp (DELETE)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main 7b68c10] Real-time update: 2025-07-09 22:28:18
+ 1 file changed, 11 insertions(+)
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+ ! [remote rejected] main -> main (cannot lock ref 'refs/heads/main': is at 1ae83b8774a005abd25b043b0dcf210d41286188 but expected 902cd541f069bee193f5d43de3a0e5e3a2dcfbb6)
+error: failed to push some refs to 'https://github.com/menu150/praetor.git'
+✅ Git push complete.
+🔄 Change detected: .chat.jsx.swp (DELETE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
