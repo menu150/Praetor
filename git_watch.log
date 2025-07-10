@@ -14438,3 +14438,13 @@ Everything up-to-date
 🔄 Change detected: interception-route-rewrite-manifest.js.tmp.gjy8l5i9eac (MODIFY)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main 82da325] Real-time update: 2025-07-09 22:31:58
+ 1 file changed, 21 insertions(+)
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+   714c947..fd21352  main -> main
+✅ Git push complete.
+🔄 Change detected: build-manifest.json.tmp.vv1kmdijbhe (CREATE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
