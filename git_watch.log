@@ -2861,3 +2861,10 @@ remove the file manually to continue.
 error: cannot pull with rebase: You have unstaged changes.
 error: additionally, your index contains uncommitted changes.
 error: Please commit or stash them.
+[main 2fd8643] Real-time update: 2025-07-09 22:12:50
+ 1 file changed, 27 insertions(+)
+Everything up-to-date
+✅ Git push complete.
+🔄 Change detected: build-manifest.json.tmp.siukdcedm9c (CREATE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
