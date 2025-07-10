@@ -9,6 +9,7 @@ from flask_cors import CORS
 from dotenv import load_dotenv
 from flasgger import Swagger
 
+
 # Load environment variables
 load_dotenv()
 API_KEY = os.getenv("PRAETOR_API_KEY")
@@ -133,7 +134,21 @@ def intent_endpoint():
         return jsonify(status="ok", intent=intent, response=result)
     except Exception as e:
         return jsonify(status="error", error=str(e)), 500
+import socket
 
-if __name__ == '__main__':
-    port = int(os.getenv("PORT", 5050))
-    app.run(host='0.0.0.0', port=port)
+def find_open_port(start_port=5000, max_tries=10):
+    port = start_port
+    for _ in range(max_tries):
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            try:
+                s.bind(("", port))
+                s.listen(1)
+                return port
+            except OSError:
+                port += 1
+    raise RuntimeError("No open ports found in range.")
+
+if __name__ == "__main__":
+    chosen_port = find_open_port(5000)
+    print(f"[🚀] Starting Flask on available port {chosen_port}...")
+    app.run(host="0.0.0.0", port=chosen_port)
