@@ -10942,3 +10942,10 @@ To https://github.com/menu150/praetor.git
 🔄 Change detected: _buildManifest.js.tmp.5c0wixxatd (MODIFY)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main 411506b] Real-time update: 2025-07-09 22:30:02
+ 1 file changed, 10 insertions(+)
+Everything up-to-date
+✅ Git push complete.
+🔄 Change detected: _ssgManifest.js.tmp.jmw6h2qzee8 (MODIFY)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
