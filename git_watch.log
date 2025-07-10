@@ -28020,3 +28020,27 @@ may have crashed in this repository earlier:
 remove the file manually to continue.
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+On branch main
+Your branch is ahead of 'origin/main' by 430 commits.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   git_watch.log
+
+no changes added to commit (use "git add" and/or "git commit -a")
+[main dd3da1c] Real-time update: 2025-07-09 22:46:10
+ 1 file changed, 33 insertions(+)
+To https://github.com/menu150/praetor.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/menu150/praetor.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+✅ Git push complete.
+🔄 Change detected: build-manifest.json.tmp.r4ui38qubfh (CREATE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
