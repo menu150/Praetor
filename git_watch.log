@@ -45,3 +45,14 @@ Watches established.
 🔄 Change detected: udo systemctl restart git-watch (CREATE)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main 0b1415f] Real-time update: 2025-07-09 22:07:49
+ 3 files changed, 59 insertions(+)
+ create mode 100644 udo systemctl restart git-watch
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+   4eb5471..0b1415f  main -> main
+✅ Git push complete.
+🔄 Change detected: udo systemctl restart git-watch (MODIFY)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
