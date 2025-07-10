@@ -7912,3 +7912,13 @@ Everything up-to-date
 🔄 Change detected: .chat.jsx.swp (CREATE)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main fad7757] Real-time update: 2025-07-09 22:27:37
+ 1 file changed, 14 insertions(+)
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+   f03ba08..9e767c8  main -> main
+✅ Git push complete.
+🔄 Change detected: .chat.jsx.swp (CREATE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
