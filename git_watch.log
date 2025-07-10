@@ -7112,3 +7112,7 @@ error: Please commit or stash them.
 To https://github.com/menu150/praetor.git
  ! [remote rejected] main -> main (cannot lock ref 'refs/heads/main': is at 4956307a0f895857c13e586e5f8c36761ca4dec8 but expected d87c011884540fe58f931fec38063cf87f1bfc61)
 error: failed to push some refs to 'https://github.com/menu150/praetor.git'
+✅ Git push complete.
+🔄 Change detected: pages-manifest.json.tmp.33dwvanfdt7 (CREATE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
