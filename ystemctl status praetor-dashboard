@@ -1,0 +1,6 @@
+● praetor-dashboard.service - Praetor Dashboard Web UI
+     Loaded: loaded (]8;;file://Praetor/etc/systemd/system/praetor-dashboard.service/etc/systemd/system/praetor-dashboard.service]8;;; [0;1;32menabled[0m; preset: [0;1;32menabled[0m)
+     Active: activating (auto-restart) (Result: exit-code) since Wed 2025-07-09 22:10:47 CDT; 3s ago
+    Process: 2794456 ExecStart=/home/menu150/praetor/venv/bin/python3 -m app [0;1;31m(code=exited, status=1/FAILURE)[0m
+   Main PID: 2794456 (code=exited, status=1/FAILURE)
+        CPU: 15ms
