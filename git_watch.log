@@ -132800,3 +132800,16 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 🔄 Change detected: chat.jsx (MODIFY)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main d45253e3] Real-time update: 2025-07-09 23:40:29
+ 1 file changed, 15 insertions(+)
+To https://github.com/menu150/praetor.git
+ ! [rejected]          main -> main (non-fast-forward)
+error: failed to push some refs to 'https://github.com/menu150/praetor.git'
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. If you want to integrate the remote changes,
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+✅ Git push complete.
+🔄 Change detected: chat.jsx (MODIFY)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
