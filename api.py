@@ -149,6 +149,8 @@ def find_open_port(start_port=5000, max_tries=10):
     raise RuntimeError("No open ports found in range.")
 
 if __name__ == "__main__":
-    chosen_port = find_open_port(5000)
-    print(f"[🚀] Starting Flask on available port {chosen_port}...")
-    app.run(host="0.0.0.0", port=chosen_port)
+    port = find_open_port(5000)
+    with open(".flask_port", "w") as f:
+        f.write(str(port))
+    print(f"[🚀] Flask starting on port {port}")
+    app.run(host="0.0.0.0", port=port)
