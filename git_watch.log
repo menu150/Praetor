@@ -37297,3 +37297,18 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 🔄 Change detected: _ssgManifest.js.tmp.dqssmmrq3fi (MODIFY)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main d087437f] Real-time update: 2025-07-09 22:48:13
+ 2 files changed, 14 insertions(+)
+ delete mode 100644 dashboard/pages/.chat.jsx.swp
+To https://github.com/menu150/praetor.git
+ ! [rejected]          main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/menu150/praetor.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+✅ Git push complete.
+🔄 Change detected: fallback-build-manifest.json.tmp.73upzidj83k (CREATE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
