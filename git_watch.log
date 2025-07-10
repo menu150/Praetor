@@ -10606,3 +10606,14 @@ To https://github.com/menu150/praetor.git
 🔄 Change detected: server-reference-manifest.json.tmp.worr4uq7nh (MODIFY)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main aed6a8c] Real-time update: 2025-07-09 22:29:51
+ 1 file changed, 10 insertions(+)
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+ ! [remote rejected] main -> main (cannot lock ref 'refs/heads/main': is at d8b26c95b74ea078d5f5bd28b2e48d426bc528d5 but expected 77da9d89be30f304d88664bb28465e7ea4198f9e)
+error: failed to push some refs to 'https://github.com/menu150/praetor.git'
+✅ Git push complete.
+🔄 Change detected: server-reference-manifest.json.tmp.worr4uq7nh (CREATE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
