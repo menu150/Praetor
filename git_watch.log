@@ -94,3 +94,13 @@ Everything up-to-date
 🔄 Change detected: ystemctl status praetor-dashboard (MODIFY)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main aa2492f] Real-time update: 2025-07-09 22:10:53
+ 1 file changed, 15 insertions(+)
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+   88fd548..461bf19  main -> main
+✅ Git push complete.
+🔄 Change detected: ystemctl status praetor-dashboard (MODIFY)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
