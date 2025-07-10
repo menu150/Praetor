@@ -4522,3 +4522,10 @@ remove the file manually to continue.
 error: cannot pull with rebase: You have unstaged changes.
 error: additionally, your index contains uncommitted changes.
 error: Please commit or stash them.
+[main af2079d] Real-time update: 2025-07-09 22:13:41
+ 1 file changed, 27 insertions(+)
+Everything up-to-date
+✅ Git push complete.
+🔄 Change detected: next-font-manifest.js.tmp.4qz49i8cgxn (CREATE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
