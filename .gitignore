@@ -1,3 +1,9 @@
 # Ignore local env file containing secrets
 .env
 .env
+# Ignore virtual environment
+venv/
+__pycache__/
+*.pyc
+*.log
+*.db-journal
