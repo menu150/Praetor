@@ -3622,3 +3622,5 @@ To https://github.com/menu150/praetor.git
 error: failed to push some refs to 'https://github.com/menu150/praetor.git'
 ✅ Git push complete.
 🔄 Change detected: interception-route-rewrite-manifest.js.tmp.pilbboe5ls (MODIFY)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
