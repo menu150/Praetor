@@ -10263,3 +10263,10 @@ remove the file manually to continue.
 error: cannot pull with rebase: You have unstaged changes.
 error: additionally, your index contains uncommitted changes.
 error: Please commit or stash them.
+[main 0ff727d] Real-time update: 2025-07-09 22:29:40
+ 1 file changed, 27 insertions(+)
+Everything up-to-date
+✅ Git push complete.
+🔄 Change detected: _buildManifest.js.tmp.wmpbi9kvhu (MODIFY)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
