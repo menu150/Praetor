@@ -16889,3 +16889,17 @@ an editor opened by 'git commit'. Please make sure all processes
 are terminated then try again. If it still fails, a git process
 may have crashed in this repository earlier:
 remove the file manually to continue.
+fatal: Unable to create '/home/menu150/praetor/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+[main 9f66531] Real-time update: 2025-07-09 22:33:20
+ 1 file changed, 50 insertions(+)
+Everything up-to-date
+✅ Git push complete.
+🔄 Change detected: server-reference-manifest.js.tmp.pe9iy8ljdi (MODIFY)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
