@@ -3206,3 +3206,30 @@ error: failed to push some refs to 'https://github.com/menu150/praetor.git'
 🔄 Change detected: next-font-manifest.json.tmp.jvuta0myb4 (CREATE)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main dab2c58] Real-time update: 2025-07-09 22:13:01
+ 1 file changed, 9 insertions(+)
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+   7135963..c2b7648  main -> main
+✅ Git push complete.
+🔄 Change detected: next-font-manifest.js.tmp.amlxmey3nfs (MODIFY)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+To https://github.com/menu150/praetor.git
+ ! [remote rejected] main -> main (cannot lock ref 'refs/heads/main': is at dab2c585108a4ab1f38bdc7c9920776889f2d56a but expected 7135963cee55d0aaaf9d18dd6e37c594ff688940)
+error: failed to push some refs to 'https://github.com/menu150/praetor.git'
+✅ Git push complete.
+🔄 Change detected: next-font-manifest.json.tmp.jvuta0myb4 (MODIFY)
+fatal: Unable to create '/home/menu150/praetor/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+error: cannot pull with rebase: You have unstaged changes.
+error: additionally, your index contains uncommitted changes.
+error: Please commit or stash them.
