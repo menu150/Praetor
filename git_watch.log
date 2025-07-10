@@ -10270,3 +10270,13 @@ Everything up-to-date
 🔄 Change detected: _buildManifest.js.tmp.wmpbi9kvhu (MODIFY)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main 171db35] Real-time update: 2025-07-09 22:29:40
+ 1 file changed, 7 insertions(+)
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+   cb52abd..0ff727d  main -> main
+✅ Git push complete.
+🔄 Change detected: _buildManifest.js.tmp.wmpbi9kvhu (CREATE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
