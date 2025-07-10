@@ -1240,3 +1240,39 @@ error: failed to push some refs to 'https://github.com/menu150/praetor.git'
 🔄 Change detected: _clientMiddlewareManifest.json.tmp.unkk177b1w (MODIFY)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main cbe0eac] Real-time update: 2025-07-09 22:12:02
+ 1 file changed, 9 insertions(+)
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+ ! [remote rejected] main -> main (cannot lock ref 'refs/heads/main': is at cbe0eac23ad3ebc517e05166be4bd226b760047b but expected 73f83482bba3bf18c2e087e66918ba0e9618850e)
+error: failed to push some refs to 'https://github.com/menu150/praetor.git'
+✅ Git push complete.
+🔄 Change detected: next-font-manifest.json.tmp.jn5nr3wvpb (CREATE)
+error: cannot pull with rebase: You have unstaged changes.
+To https://github.com/menu150/praetor.git
+error: Please commit or stash them.
+   73f8348..262edaf  main -> main
+✅ Git push complete.
+🔄 Change detected: _clientMiddlewareManifest.json.tmp.unkk177b1w (MODIFY)
+fatal: Unable to create '/home/menu150/praetor/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   git_watch.log
+
+no changes added to commit (use "git add" and/or "git commit -a")
