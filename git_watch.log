@@ -21081,3 +21081,29 @@ error: failed to push some refs to 'https://github.com/menu150/praetor.git'
 🔄 Change detected: .praetor.js.swp (DELETE)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main f287ab8] Real-time update: 2025-07-09 22:38:43
+ 1 file changed, 11 insertions(+)
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+   b3d6588..f34b27f  main -> main
+✅ Git push complete.
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+ ! [remote rejected] main -> main (cannot lock ref 'refs/heads/main': is at f287ab8d8e64cd7c02784a106a846a7d2c8d5afb but expected b3d658861adbf786dec1d88e76ec58398a17de4f)
+error: failed to push some refs to 'https://github.com/menu150/praetor.git'
+✅ Git push complete.
+🔄 Change detected: ..env.swp (DELETE)
+🔄 Change detected: ..env.swp (DELETE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+fatal: Unable to create '/home/menu150/praetor/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
