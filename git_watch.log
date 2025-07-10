@@ -135499,3 +135499,10 @@ remove the file manually to continue.
 error: cannot pull with rebase: You have unstaged changes.
 error: additionally, your index contains uncommitted changes.
 error: Please commit or stash them.
+[main 6f44cc62] Real-time update: 2025-07-09 23:46:21
+ 1 file changed, 27 insertions(+)
+Everything up-to-date
+✅ Git push complete.
+🔄 Change detected: pages-manifest.json.tmp.dh8qfvfwovw (MODIFY)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
