@@ -168009,3 +168009,13 @@ To https://github.com/menu150/praetor.git
 🔄 Change detected: _9c672c00._.js (DELETE)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main 7deb31dd] Real-time update: 2025-07-11 13:41:37
+ 1 file changed, 10 insertions(+)
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+   1b4684ca..2297b360  main -> main
+✅ Git push complete.
+🔄 Change detected: _2164c8b5._.js.map (DELETE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
