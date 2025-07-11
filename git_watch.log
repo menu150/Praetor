@@ -143199,3 +143199,13 @@ Everything up-to-date
 🔄 Change detected: app-build-manifest.json.tmp.tvz3xf9faw (MODIFY)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main 937ed962] Real-time update: 2025-07-11 12:25:09
+ 1 file changed, 28 insertions(+)
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+   e4a85d51..3c56eaac  main -> main
+✅ Git push complete.
+🔄 Change detected: app-build-manifest.json.tmp.tvz3xf9faw (MODIFY)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
