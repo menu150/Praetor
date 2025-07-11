@@ -280301,3 +280301,12 @@ error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
 Auto packing the repository in background for optimum performance.
 See "git help gc" for manual housekeeping.
+[main f19b8546] Real-time update: 2025-07-11 15:55:38
+ 1 file changed, 96 insertions(+)
+fatal: unable to access 'https://github.com/menu150/praetor.git/': Could not resolve host: github.com
+✅ Git push complete.
+🔄 Change detected: _clientMiddlewareManifest.json.tmp.6kv01my11wc (CREATE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+Auto packing the repository in background for optimum performance.
+See "git help gc" for manual housekeeping.
