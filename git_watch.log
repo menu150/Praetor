@@ -168833,3 +168833,14 @@ To https://github.com/menu150/praetor.git
 🔄 Change detected: react-loadable-manifest.json (DELETE)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main d4bc4af6] Real-time update: 2025-07-11 13:42:24
+ 1 file changed, 10 insertions(+)
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+ ! [remote rejected]   main -> main (cannot lock ref 'refs/heads/main': is at 18415b0d3a2fe55731aede4ea947d039dfbc021a but expected aa93b9137699d1d053728e7a55892bada2172639)
+error: failed to push some refs to 'https://github.com/menu150/praetor.git'
+✅ Git push complete.
+🔄 Change detected: react-loadable-manifest.json (DELETE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
