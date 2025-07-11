@@ -158209,3 +158209,12 @@ remote:   https://github.com/menu150/Praetor.git
 🔄 Change detected: node_modules_next_dist_4f3d469a._.js.map (MODIFY)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+To https://github.com/menu150/praetor.git
+ ! [remote rejected]   main -> main (cannot lock ref 'refs/heads/main': is at 10dc6961fca3535e023b9a524e03215799c8cd3b but expected 50a45a665304d42a99f725218b250f62768230c8)
+error: failed to push some refs to 'https://github.com/menu150/praetor.git'
+✅ Git push complete.
+🔄 Change detected: node_modules_next_dist_4f3d469a._.js.map (MODIFY)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+[main 158b6304] Real-time update: 2025-07-11 12:50:03
+ 1 file changed, 12 insertions(+)
