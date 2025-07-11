@@ -180897,3 +180897,12 @@ error: failed to push some refs to 'https://github.com/menu150/praetor.git'
 🔄 Change detected: app-paths-manifest.json (MODIFY)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main d1f8a27b] Real-time update: 2025-07-11 13:44:37
+ 2 files changed, 1842 insertions(+)
+ create mode 100644 dashboard/package-lock.json
+fatal: the remote end hung up unexpectedly
+Everything up-to-date
+✅ Git push complete.
+🔄 Change detected: praetor (DELETE,ISDIR)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
