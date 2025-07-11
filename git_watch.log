@@ -166693,3 +166693,13 @@ Everything up-to-date
 🔄 Change detected: node_modules_a51498a5._.js (DELETE)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main 1a9a20d6] Real-time update: 2025-07-11 13:40:22
+ 1 file changed, 21 insertions(+)
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+   52067489..001e43c5  main -> main
+✅ Git push complete.
+🔄 Change detected: node_modules_@swc_helpers_cjs_00636ac3._.js.map (DELETE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
