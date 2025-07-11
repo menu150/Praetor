@@ -162939,3 +162939,32 @@ error: failed to push some refs to 'https://github.com/menu150/praetor.git'
 error: cannot pull with rebase: You have unstaged changes.
 error: additionally, your index contains uncommitted changes.
 error: Please commit or stash them.
+[main 43af4784] Real-time update: 2025-07-11 12:54:26
+ 1 file changed, 20 insertions(+)
+[main 94d76f3f] Real-time update: 2025-07-11 12:54:26
+ 1 file changed, 8 insertions(+)
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+   59c318fb..43af4784  main -> main
+✅ Git push complete.
+🔄 Change detected: app-paths-manifest.json.tmp.9lhbf64zdyb (MODIFY)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+To https://github.com/menu150/praetor.git
+ ! [remote rejected]   main -> main (cannot lock ref 'refs/heads/main': is at 94d76f3fd154ceedb25e097bc377f872eee90bc5 but expected 59c318fb84aec0d6f1e9cfe9129a5970f5f9975e)
+error: failed to push some refs to 'https://github.com/menu150/praetor.git'
+✅ Git push complete.
+🔄 Change detected: app-build-manifest.json.tmp.28z9irumsos (MODIFY)
+fatal: Unable to create '/home/menu150/praetor/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+error: cannot pull with rebase: You have unstaged changes.
+error: additionally, your index contains uncommitted changes.
+error: Please commit or stash them.
