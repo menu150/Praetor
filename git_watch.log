@@ -144697,3 +144697,13 @@ error: failed to push some refs to 'https://github.com/menu150/praetor.git'
 🔄 Change detected: tmp_file_io_benchmark_7c8866996d3480d6a491174cd7767a40 (CREATE)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main 3e967b05] Real-time update: 2025-07-11 12:32:52
+ 1 file changed, 11 insertions(+)
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+   d862e183..6111576a  main -> main
+✅ Git push complete.
+🔄 Change detected: tmp_file_io_benchmark_7c8866996d3480d6a491174cd7767a40 (CREATE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
