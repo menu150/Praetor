@@ -169003,3 +169003,10 @@ remote:   https://github.com/menu150/Praetor.git
 🔄 Change detected: node_modules_next_dist_0962b827._.js.map (DELETE)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+To https://github.com/menu150/praetor.git
+ ! [remote rejected]   main -> main (cannot lock ref 'refs/heads/main': is at dae662c975e41d1fdcefce0ecf4e0ef551e4cf6b but expected 16c9c83ddaa1318b8fb48053ab391d97af760f1d)
+error: failed to push some refs to 'https://github.com/menu150/praetor.git'
+✅ Git push complete.
+🔄 Change detected: next-font-manifest.json (DELETE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
