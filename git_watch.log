@@ -191866,3 +191866,10 @@ fatal: unable to access 'https://github.com/menu150/praetor.git/': Could not res
 🔄 Change detected: middleware-build-manifest.js.tmp.prig70jp2ue (MODIFY)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main ba95c2fb] Real-time update: 2025-07-11 15:50:13
+ 1 file changed, 7 insertions(+)
+fatal: unable to access 'https://github.com/menu150/praetor.git/': Could not resolve host: github.com
+✅ Git push complete.
+🔄 Change detected: interception-route-rewrite-manifest.js.tmp.qpcykizpre (CREATE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
