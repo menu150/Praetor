@@ -169849,3 +169849,13 @@ error: failed to push some refs to 'https://github.com/menu150/praetor.git'
 🔄 Change detected: static (DELETE,ISDIR)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main b45455b1] Real-time update: 2025-07-11 13:43:22
+ 1 file changed, 11 insertions(+)
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+   b8448a11..18d073a4  main -> main
+✅ Git push complete.
+🔄 Change detected: chunks (DELETE,ISDIR)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
