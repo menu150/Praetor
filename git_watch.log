@@ -313508,3 +313508,10 @@ fatal: unable to access 'https://github.com/menu150/praetor.git/': Could not res
 🔄 Change detected: server-reference-manifest.json.tmp.fqvrn6c84j (MODIFY)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main 1dfa1a28] Real-time update: 2025-07-11 15:58:25
+ 1 file changed, 7 insertions(+)
+fatal: unable to access 'https://github.com/menu150/praetor.git/': Could not resolve host: github.com
+✅ Git push complete.
+🔄 Change detected: server-reference-manifest.js.tmp.mcxg905xmk8 (CREATE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
