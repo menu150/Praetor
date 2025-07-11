@@ -166839,3 +166839,17 @@ error: failed to push some refs to 'https://github.com/menu150/praetor.git'
 error: cannot pull with rebase: You have unstaged changes.
 error: additionally, your index contains uncommitted changes.
 error: Please commit or stash them.
+[main b496c1b7] Real-time update: 2025-07-11 13:40:30
+ 1 file changed, 20 insertions(+)
+[main eb3da749] Real-time update: 2025-07-11 13:40:30
+ 1 file changed, 8 insertions(+)
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+   8037d0f0..b496c1b7  main -> main
+✅ Git push complete.
+🔄 Change detected: node_modules_next_dist_4f3d469a._.js (DELETE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
