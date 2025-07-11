@@ -20,7 +20,8 @@ export default function Chat() {
     })
 
     const data = await res.json()
-    setMessages(prev => [...prev, { role: 'assistant', content: data.response?.join('\n') || 'Error' }])
+    const reply = Array.isArray(data.response) ? data.response.join('\n') : data.response
+    setMessages(prev => [...prev, { role: 'assistant', content: reply || 'Error' }])
   }
 
   return (

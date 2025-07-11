@@ -10,7 +10,7 @@ export default function Chat() {
     setMessages([...messages, { role: 'user', content: input }])
     setInput('')
 
-    const res = await fetch('/api/praetor/chat', {
+    const res = await fetch('/api/chat', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -20,7 +20,8 @@ export default function Chat() {
     })
 
     const data = await res.json()
-    setMessages(prev => [...prev, { role: 'assistant', content: data.response?.join('\n') || 'Error' }])
+    const reply = Array.isArray(data.response) ? data.response.join('\n') : data.response
+    setMessages(prev => [...prev, { role: 'assistant', content: reply || 'Error' }])
   }
 
   return (
