@@ -314726,3 +314726,10 @@ fatal: unable to access 'https://github.com/menu150/praetor.git/': Could not res
 🔄 Change detected: _clientMiddlewareManifest.json.tmp.47y4r46ggyr (MODIFY)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main 50d32421] Real-time update: 2025-07-11 15:59:30
+ 1 file changed, 7 insertions(+)
+fatal: unable to access 'https://github.com/menu150/praetor.git/': Could not resolve host: github.com
+✅ Git push complete.
+🔄 Change detected: next-font-manifest.json.tmp.ha4p8y65jrk (CREATE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
