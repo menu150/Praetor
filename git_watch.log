@@ -139814,3 +139814,13 @@ Everything up-to-date
 🔄 Change detected: tmp_file_io_benchmark_c5bad64274dcc8880f26bd76e258911d (MODIFY)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main 11c7684f] Real-time update: 2025-07-11 12:22:15
+ 1 file changed, 28 insertions(+)
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+   66145d40..2db259f9  main -> main
+✅ Git push complete.
+🔄 Change detected: tmp_file_io_benchmark_c5bad64274dcc8880f26bd76e258911d (DELETE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
