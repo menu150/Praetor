@@ -168573,3 +168573,13 @@ error: failed to push some refs to 'https://github.com/menu150/praetor.git'
 🔄 Change detected: node_modules_next_dist_client_components_unauthorized-error_c8949b27.js.map (DELETE)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main 43880c76] Real-time update: 2025-07-11 13:42:09
+ 1 file changed, 11 insertions(+)
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+   bb5e811f..5637c662  main -> main
+✅ Git push complete.
+🔄 Change detected: node_modules_next_dist_0962b827._.js (DELETE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
