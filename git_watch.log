@@ -147226,3 +147226,13 @@ error: failed to push some refs to 'https://github.com/menu150/praetor.git'
 🔄 Change detected: _clientMiddlewareManifest.json.tmp.loyda8b2ja (MODIFY)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main 11017d36] Real-time update: 2025-07-11 12:40:33
+ 1 file changed, 11 insertions(+)
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+   76efb868..7f711e8a  main -> main
+✅ Git push complete.
+🔄 Change detected: _clientMiddlewareManifest.json.tmp.loyda8b2ja (CREATE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
