@@ -146473,3 +146473,43 @@ Everything up-to-date
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
 Everything up-to-date
+✅ Git push complete.
+🔄 Change detected: .flask_port (MODIFY)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+fatal: Unable to create '/home/menu150/praetor/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: Unable to create '/home/menu150/praetor/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+[main ebeb4428] Real-time update: 2025-07-11 12:39:57
+ 2 files changed, 62 insertions(+), 1 deletion(-)
+Everything up-to-date
+✅ Git push complete.
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+   beccf9a6..ebeb4428  main -> main
+✅ Git push complete.
+🔄 Change detected: tmp_file_io_benchmark_6c7115e551305adb81cb920e8e28484f (CREATE)
+🔄 Change detected: tmp_file_io_benchmark_6c7115e551305adb81cb920e8e28484f (CREATE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+fatal: Unable to create '/home/menu150/praetor/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
