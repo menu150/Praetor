@@ -156273,3 +156273,15 @@ To https://github.com/menu150/praetor.git
 🔄 Change detected: node_modules_next_dist_4f3d469a._.js.map (MODIFY)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+[main 47cc8c78] Real-time update: 2025-07-11 12:48:20
+ 2 files changed, 12 insertions(+)
+ create mode 100644 dashboard/pages/api/.chat.js.swp
+To https://github.com/menu150/praetor.git
+ ! [remote rejected]   main -> main (cannot lock ref 'refs/heads/main': is at 91e793e04a61f2ecc92a03149a4df790e051849e but expected 756af20d747699f3f2f57573248e62bad3d9807a)
+error: failed to push some refs to 'https://github.com/menu150/praetor.git'
+✅ Git push complete.
+🔄 Change detected: node_modules_next_dist_4f3d469a._.js (MODIFY)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
