@@ -164674,3 +164674,49 @@ error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
 remote: This repository moved. Please use the new location:        
 remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+ ! [remote rejected]   main -> main (cannot lock ref 'refs/heads/main': is at dea6b0c48402e0deeef569e1e712aca0e9ad6782 but expected 75c2e4ab29863467075c86cfac0f4e53774a3707)
+error: failed to push some refs to 'https://github.com/menu150/praetor.git'
+✅ Git push complete.
+🔄 Change detected: fallback-build-manifest.json.tmp.qu3rtg5qx1 (MODIFY)
+error: cannot pull with rebase: You have unstaged changes.
+error: additionally, your index contains uncommitted changes.
+error: Please commit or stash them.
+fatal: Unable to create '/home/menu150/praetor/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+Auto packing the repository in background for optimum performance.
+See "git help gc" for manual housekeeping.
+On branch main
+Your branch is ahead of 'origin/main' by 2 commits.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   git_watch.log
+
+no changes added to commit (use "git add" and/or "git commit -a")
+[main 1807901c] Real-time update: 2025-07-11 12:56:02
+ 1 file changed, 31 insertions(+)
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+ ! [remote rejected]   main -> main (cannot lock ref 'refs/heads/main': is at 1807901c8a917d3496ad7aa7d0c209f2d98d537b but expected dea6b0c48402e0deeef569e1e712aca0e9ad6782)
+error: failed to push some refs to 'https://github.com/menu150/praetor.git'
+To https://github.com/menu150/praetor.git
+   dea6b0c4..1807901c  main -> main
+✅ Git push complete.
+🔄 Change detected: next-font-manifest.js.tmp.blpz8bowoic (MODIFY)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+✅ Git push complete.
+🔄 Change detected: middleware-manifest.json.tmp.syqre6jge2h (CREATE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
