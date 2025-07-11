@@ -185051,3 +185051,19 @@ error: failed to push some refs to 'https://github.com/menu150/praetor.git'
 🔄 Change detected: [turbopack]_runtime.js.map (MODIFY)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main 108ca0f7] Real-time update: 2025-07-11 14:33:08
+ 3 files changed, 39 insertions(+)
+ delete mode 100644 app/components/.errorboundary.jsx.swp
+ create mode 100644 app/components/errorboundary.jsx
+remote: error: Trace: ed10ad00b773888518679bd39ad136a9c005921122534485ec3422c809a617b8        
+remote: error: See https://gh.io/lfs for more information.        
+remote: error: File dashboard-backup/dashboard/node_modules/@next/swc-linux-x64-gnu/next-swc.linux-x64-gnu.node is 142.01 MB; this exceeds GitHub's file size limit of 100.00 MB        
+remote: error: File dashboard-backup/dashboard/node_modules/@next/swc-linux-x64-musl/next-swc.linux-x64-musl.node is 141.89 MB; this exceeds GitHub's file size limit of 100.00 MB        
+remote: error: GH001: Large files detected. You may want to try Git Large File Storage - https://git-lfs.github.com.        
+To https://github.com/menu150/praetor.git
+ ! [remote rejected]   main -> main (pre-receive hook declined)
+error: failed to push some refs to 'https://github.com/menu150/praetor.git'
+✅ Git push complete.
+🔄 Change detected: [root-of-the-server]__86e7898f._.js (MODIFY)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
