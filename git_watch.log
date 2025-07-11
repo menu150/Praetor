@@ -162825,3 +162825,13 @@ error: failed to push some refs to 'https://github.com/menu150/praetor.git'
 🔄 Change detected: server-reference-manifest.json.tmp.lll3ov709d7 (MODIFY)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main 78a90f64] Real-time update: 2025-07-11 12:54:19
+ 1 file changed, 11 insertions(+)
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+   07a71b79..de1c2937  main -> main
+✅ Git push complete.
+🔄 Change detected: tmp_file_io_benchmark_761293b25158a260426ac6dc63fd1a97 (DELETE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
