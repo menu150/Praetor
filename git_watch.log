@@ -144950,3 +144950,31 @@ To https://github.com/menu150/praetor.git
 🔄 Change detected: tmp_file_io_benchmark_5513085a6de8941402bdcd096cd25547 (CREATE)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+To https://github.com/menu150/praetor.git
+ ! [remote rejected]   main -> main (cannot lock ref 'refs/heads/main': is at 398bf5f2bc16ea2e3bfdd274693dc5dbfcfc3bba but expected 55ea173a3f06385777cf23e5c8780ee937b5a05a)
+error: failed to push some refs to 'https://github.com/menu150/praetor.git'
+✅ Git push complete.
+🔄 Change detected: tmp_file_io_benchmark_5513085a6de8941402bdcd096cd25547 (CREATE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+fatal: Unable to create '/home/menu150/praetor/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: Unable to create '/home/menu150/praetor/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+[main 0f8de1b6] Real-time update: 2025-07-11 12:33:05
+ 1 file changed, 12 insertions(+)
+Everything up-to-date
+✅ Git push complete.
+🔄 Change detected: tmp_file_io_benchmark_5513085a6de8941402bdcd096cd25547 (MODIFY)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
