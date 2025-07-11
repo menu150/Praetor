@@ -165417,3 +165417,14 @@ To https://github.com/menu150/praetor.git
 🔄 Change detected: postcss_config_js_transform_ts_c2e3f562._.js (DELETE)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main 8283ddee] Real-time update: 2025-07-11 13:39:12
+ 1 file changed, 10 insertions(+)
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+ ! [remote rejected]   main -> main (cannot lock ref 'refs/heads/main': is at 0c1c5d5759f75cf235debab8b00ebb6eb9f14f77 but expected 2513315643131b1d7d5310aa7f90023d8ef8210f)
+error: failed to push some refs to 'https://github.com/menu150/praetor.git'
+✅ Git push complete.
+🔄 Change detected: postcss_config_js_transform_ts_c2e3f562._.js.map (DELETE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
