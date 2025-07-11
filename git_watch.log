@@ -166903,3 +166903,13 @@ error: failed to push some refs to 'https://github.com/menu150/praetor.git'
 🔄 Change detected: node_modules_next_dist_build_polyfills_polyfill-nomodule.js (DELETE)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main 2d7cce96] Real-time update: 2025-07-11 13:40:33
+ 1 file changed, 11 insertions(+)
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+   1d36a342..2a251d25  main -> main
+✅ Git push complete.
+🔄 Change detected: node_modules_next_dist_b758c999._.js (DELETE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
