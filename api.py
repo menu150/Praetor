@@ -35,7 +35,7 @@ import brain
 import train_skill
 
 # Route: Universal chat endpoint for web interface
-@app.route("/api/praetor", methods=["POST"])
+@app.route("/api/praetor/chat", methods=["POST"])
 @auth.login_required
 def praetor_chat():
     data = request.get_json(force=True, silent=True)
