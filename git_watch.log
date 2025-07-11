@@ -145271,3 +145271,14 @@ To https://github.com/menu150/praetor.git
 🔄 Change detected: interception-route-rewrite-manifest.js.tmp.m4rra0pxbnl (CREATE)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main 9661a334] Real-time update: 2025-07-11 12:33:21
+ 1 file changed, 10 insertions(+)
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+ ! [remote rejected]   main -> main (cannot lock ref 'refs/heads/main': is at 2076bd9a311e66f8026cf9e9570719ace446ba5c but expected b8c36eea93339772297e1f80b442317057b1d7a2)
+error: failed to push some refs to 'https://github.com/menu150/praetor.git'
+✅ Git push complete.
+🔄 Change detected: interception-route-rewrite-manifest.js.tmp.m4rra0pxbnl (CREATE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
