@@ -168750,3 +168750,13 @@ To https://github.com/menu150/praetor.git
 🔄 Change detected: pages-manifest.json (DELETE)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main eead2432] Real-time update: 2025-07-11 13:42:19
+ 1 file changed, 10 insertions(+)
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+   6b924b7b..00434d26  main -> main
+✅ Git push complete.
+🔄 Change detected: node_modules_next_9babd674._.js (DELETE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
