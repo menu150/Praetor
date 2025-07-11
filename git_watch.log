@@ -142814,3 +142814,14 @@ To https://github.com/menu150/praetor.git
 🔄 Change detected: _ssgManifest.js.tmp.ydmagj3lzr (MODIFY)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main 25920eab] Real-time update: 2025-07-11 12:24:50
+ 1 file changed, 10 insertions(+)
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+ ! [remote rejected]   main -> main (cannot lock ref 'refs/heads/main': is at e99f3b30ecc93414f99ebbaf56daec9b1ea63369 but expected 52075eaac5a6ca0c1ba7b252596705a7e8d8d09d)
+error: failed to push some refs to 'https://github.com/menu150/praetor.git'
+✅ Git push complete.
+🔄 Change detected: _ssgManifest.js.tmp.ydmagj3lzr (MODIFY)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
