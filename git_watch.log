@@ -165710,3 +165710,13 @@ Everything up-to-date
 🔄 Change detected: [turbopack]_runtime.js.map (DELETE)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main 61e88e0a] Real-time update: 2025-07-11 13:39:27
+ 1 file changed, 29 insertions(+)
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+   00b51520..ceb0f7fa  main -> main
+✅ Git push complete.
+🔄 Change detected: [turbopack]_runtime.js.map (DELETE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
