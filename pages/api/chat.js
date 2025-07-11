@@ -1,3 +1,6 @@
+import logger from '../../lib/logger';
+
+
 export default async function handler(req, res) {
   try {
     const response = await fetch(...); // Your logic
