@@ -167258,3 +167258,14 @@ To https://github.com/menu150/praetor.git
 🔄 Change detected: page_client-reference-manifest.js (DELETE)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main 11fb72ef] Real-time update: 2025-07-11 13:40:54
+ 1 file changed, 10 insertions(+)
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+ ! [remote rejected]   main -> main (cannot lock ref 'refs/heads/main': is at 2ab937fd4c4cd821082e9b8f4b95894d7051a846 but expected d8a34794456d4bf39019db6359c2bf4046696c44)
+error: failed to push some refs to 'https://github.com/menu150/praetor.git'
+✅ Git push complete.
+🔄 Change detected: pages_chat_7be79319._.js (DELETE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
