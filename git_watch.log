@@ -166335,3 +166335,13 @@ error: failed to push some refs to 'https://github.com/menu150/praetor.git'
 🔄 Change detected: _16672cb8._.js (DELETE)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main 43dc438a] Real-time update: 2025-07-11 13:40:03
+ 1 file changed, 11 insertions(+)
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+   ff4691cb..d4e28c85  main -> main
+✅ Git push complete.
+🔄 Change detected: [turbopack]_browser_dev_hmr-client_hmr-client_ts_fd44f5a4._.js.map (DELETE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
