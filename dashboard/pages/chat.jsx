@@ -10,7 +10,7 @@ export default function Chat() {
     setMessages([...messages, { role: 'user', content: input }])
     setInput('')
 
-    const res = await fetch('/api/praetor', {
+    const res = await fetch('/api/praetor/chat', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
