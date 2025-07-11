@@ -167656,3 +167656,13 @@ error: failed to push some refs to 'https://github.com/menu150/praetor.git'
 🔄 Change detected: [root-of-the-server]__c75c51b7._.js (DELETE)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main 85346050] Real-time update: 2025-07-11 13:41:17
+ 1 file changed, 11 insertions(+)
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+   0ab41798..87832ac8  main -> main
+✅ Git push complete.
+🔄 Change detected: [root-of-the-server]__686a1ff1._.js (DELETE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
