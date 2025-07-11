@@ -144634,3 +144634,13 @@ error: failed to push some refs to 'https://github.com/menu150/praetor.git'
 🔄 Change detected: chat.jsx (DELETE)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main 84dc569e] Real-time update: 2025-07-11 12:32:49
+ 1 file changed, 11 insertions(+)
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+   f0ce5556..d88ae8e1  main -> main
+✅ Git push complete.
+🔄 Change detected: chat.jsx (DELETE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
