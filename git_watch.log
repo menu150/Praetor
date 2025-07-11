@@ -164486,3 +164486,33 @@ To https://github.com/menu150/praetor.git
 🔄 Change detected: interception-route-rewrite-manifest.js.tmp.j5f9lykiz8q (MODIFY)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+To https://github.com/menu150/praetor.git
+ ! [remote rejected]   main -> main (cannot lock ref 'refs/heads/main': is at 08bc170952426f7d19848a08c2729c2136ab7928 but expected 4cf71a18213fc3f647e7dfb5ccb57d034285cc1c)
+error: failed to push some refs to 'https://github.com/menu150/praetor.git'
+✅ Git push complete.
+🔄 Change detected: fallback-build-manifest.json.tmp.qu3rtg5qx1 (CREATE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+fatal: Unable to create '/home/menu150/praetor/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: Unable to create '/home/menu150/praetor/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+Auto packing the repository in background for optimum performance.
+See "git help gc" for manual housekeeping.
+[main fd2ae1db] Real-time update: 2025-07-11 12:55:52
+ 1 file changed, 14 insertions(+)
+Everything up-to-date
+✅ Git push complete.
+🔄 Change detected: fallback-build-manifest.json.tmp.qu3rtg5qx1 (MODIFY)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
