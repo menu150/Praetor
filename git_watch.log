@@ -182620,3 +182620,17 @@ error: failed to push some refs to 'https://github.com/menu150/praetor.git'
 🔄 Change detected: chat.js.nft.json (CREATE)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main 408e3e0f] Real-time update: 2025-07-11 13:58:27
+ 1 file changed, 14 insertions(+)
+remote: error: Trace: 7aa35c8f14c4d62291507f7ed4b70692ece74761010a7b39d2e489ea943a15ad        
+remote: error: See https://gh.io/lfs for more information.        
+remote: error: File dashboard-backup/dashboard/node_modules/@next/swc-linux-x64-gnu/next-swc.linux-x64-gnu.node is 142.01 MB; this exceeds GitHub's file size limit of 100.00 MB        
+remote: error: File dashboard-backup/dashboard/node_modules/@next/swc-linux-x64-musl/next-swc.linux-x64-musl.node is 141.89 MB; this exceeds GitHub's file size limit of 100.00 MB        
+remote: error: GH001: Large files detected. You may want to try Git Large File Storage - https://git-lfs.github.com.        
+To https://github.com/menu150/praetor.git
+ ! [remote rejected]   main -> main (pre-receive hook declined)
+error: failed to push some refs to 'https://github.com/menu150/praetor.git'
+✅ Git push complete.
+🔄 Change detected: layout.ts (CREATE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
