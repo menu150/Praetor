@@ -154958,3 +154958,15 @@ error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
 [main 57131a59] Real-time update: 2025-07-11 12:47:11
  1 file changed, 14 insertions(+)
+[main a2272989] Real-time update: 2025-07-11 12:47:11
+ 1 file changed, 9 insertions(+)
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+   41d44382..57131a59  main -> main
+✅ Git push complete.
+🔄 Change detected: node_modules_next_dist_4f3d469a._.js (MODIFY)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
