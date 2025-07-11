@@ -277841,3 +277841,255 @@ fatal: unable to access 'https://github.com/menu150/praetor.git/': Could not res
 error: cannot pull with rebase: You have unstaged changes.
 error: additionally, your index contains uncommitted changes.
 error: Please commit or stash them.
+fatal: Unable to create '/home/menu150/praetor/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: Unable to create '/home/menu150/praetor/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: unable to access 'https://github.com/menu150/praetor.git/': Could not resolve host: github.com
+✅ Git push complete.
+🔄 Change detected: on-recoverable-error.d.ts (DELETE)
+error: cannot pull with rebase: You have unstaged changes.
+error: additionally, your index contains uncommitted changes.
+error: Please commit or stash them.
+fatal: Unable to create '/home/menu150/praetor/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: Unable to create '/home/menu150/praetor/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: unable to access 'https://github.com/menu150/praetor.git/': Could not resolve host: github.com
+✅ Git push complete.
+🔄 Change detected: error-boundary-callbacks.js.map (DELETE)
+error: cannot pull with rebase: You have unstaged changes.
+error: additionally, your index contains uncommitted changes.
+error: Please commit or stash them.
+fatal: Unable to create '/home/menu150/praetor/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: Unable to create '/home/menu150/praetor/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: unable to access 'https://github.com/menu150/praetor.git/': Could not resolve host: github.com
+✅ Git push complete.
+🔄 Change detected: on-recoverable-error.js.map (DELETE)
+error: cannot pull with rebase: You have unstaged changes.
+error: additionally, your index contains uncommitted changes.
+error: Please commit or stash them.
+fatal: Unable to create '/home/menu150/praetor/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+On branch main
+Your branch is ahead of 'origin/main' by 1654 commits.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   git_watch.log
+
+no changes added to commit (use "git add" and/or "git commit -a")
+fatal: unable to access 'https://github.com/menu150/praetor.git/': Could not resolve host: github.com
+✅ Git push complete.
+🔄 Change detected: report-global-error.d.ts (DELETE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+[main add54ba6] Real-time update: 2025-07-11 15:55:27
+ 1 file changed, 122 insertions(+)
+fatal: unable to access 'https://github.com/menu150/praetor.git/': Could not resolve host: github.com
+✅ Git push complete.
+🔄 Change detected: middleware-manifest.json.tmp.nl382y9uo6k (MODIFY)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+fatal: Unable to create '/home/menu150/praetor/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: Unable to create '/home/menu150/praetor/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: unable to access 'https://github.com/menu150/praetor.git/': Could not resolve host: github.com
+✅ Git push complete.
+🔄 Change detected: _clientMiddlewareManifest.json.tmp.z6pc1ew4h3l (CREATE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+fatal: Unable to create '/home/menu150/praetor/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: Unable to create '/home/menu150/praetor/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: unable to access 'https://github.com/menu150/praetor.git/': Could not resolve host: github.com
+✅ Git push complete.
+🔄 Change detected: _clientMiddlewareManifest.json.tmp.z6pc1ew4h3l (MODIFY)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+fatal: Unable to create '/home/menu150/praetor/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: Unable to create '/home/menu150/praetor/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: unable to access 'https://github.com/menu150/praetor.git/': Could not resolve host: github.com
+✅ Git push complete.
+🔄 Change detected: next-font-manifest.json.tmp.dy0kuyqbba5 (CREATE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+fatal: Unable to create '/home/menu150/praetor/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: unable to access 'https://github.com/menu150/praetor.git/': Could not resolve host: github.com
+✅ Git push complete.
+🔄 Change detected: report-global-error.js (DELETE)
+error: cannot pull with rebase: You have unstaged changes.
+error: additionally, your index contains uncommitted changes.
+error: Please commit or stash them.
+fatal: Unable to create '/home/menu150/praetor/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: Unable to create '/home/menu150/praetor/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: unable to access 'https://github.com/menu150/praetor.git/': Could not resolve host: github.com
+✅ Git push complete.
+🔄 Change detected: react-client-callbacks (DELETE,ISDIR)
+error: cannot pull with rebase: You have unstaged changes.
+error: additionally, your index contains uncommitted changes.
+error: Please commit or stash them.
+fatal: Unable to create '/home/menu150/praetor/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: Unable to create '/home/menu150/praetor/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: unable to access 'https://github.com/menu150/praetor.git/': Could not resolve host: github.com
+✅ Git push complete.
+🔄 Change detected: has-base-path.d.ts (DELETE)
+error: cannot pull with rebase: You have unstaged changes.
+error: additionally, your index contains uncommitted changes.
+error: Please commit or stash them.
+fatal: Unable to create '/home/menu150/praetor/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: Unable to create '/home/menu150/praetor/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: unable to access 'https://github.com/menu150/praetor.git/': Could not resolve host: github.com
+✅ Git push complete.
+🔄 Change detected: add-locale.js.map (DELETE)
+error: cannot pull with rebase: You have unstaged changes.
+error: additionally, your index contains uncommitted changes.
+error: Please commit or stash them.
+fatal: Unable to create '/home/menu150/praetor/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: unable to access 'https://github.com/menu150/praetor.git/': Could not resolve host: github.com
+✅ Git push complete.
+🔄 Change detected: next-font-manifest.json.tmp.dy0kuyqbba5 (MODIFY)
+error: cannot pull with rebase: You have unstaged changes.
+error: additionally, your index contains uncommitted changes.
+error: Please commit or stash them.
+fatal: Unable to create '/home/menu150/praetor/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: Unable to create '/home/menu150/praetor/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+fatal: unable to access 'https://github.com/menu150/praetor.git/': Could not resolve host: github.com
+✅ Git push complete.
+🔄 Change detected: web-vitals.d.ts (DELETE)
+error: cannot pull with rebase: You have unstaged changes.
+error: additionally, your index contains uncommitted changes.
+error: Please commit or stash them.
