@@ -167520,3 +167520,13 @@ To https://github.com/menu150/praetor.git
 🔄 Change detected: server-reference-manifest.json (DELETE)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main d8dc093f] Real-time update: 2025-07-11 13:41:09
+ 1 file changed, 10 insertions(+)
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+   93df0faf..fce070ab  main -> main
+✅ Git push complete.
+🔄 Change detected: [root-of-the-server]__4c58c055._.js (DELETE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
