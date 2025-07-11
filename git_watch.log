@@ -160474,3 +160474,10 @@ an editor opened by 'git commit'. Please make sure all processes
 are terminated then try again. If it still fails, a git process
 may have crashed in this repository earlier:
 remove the file manually to continue.
+[main e47c9302] Real-time update: 2025-07-11 12:52:04
+ 1 file changed, 26 insertions(+)
+Everything up-to-date
+✅ Git push complete.
+🔄 Change detected: middleware-manifest.json.tmp.8nxyl0unb06 (CREATE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
