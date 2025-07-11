@@ -146182,3 +146182,14 @@ To https://github.com/menu150/praetor.git
 🔄 Change detected: fallback-build-manifest.json.tmp.vj5o0kbdtma (CREATE)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main 54695477] Real-time update: 2025-07-11 12:34:08
+ 1 file changed, 10 insertions(+)
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+ ! [remote rejected]   main -> main (cannot lock ref 'refs/heads/main': is at 492f2b2ef485ec32b75fa5c439a6bba514a2223c but expected d5343daee9a17a45eecaf687901daae9bb04d347)
+error: failed to push some refs to 'https://github.com/menu150/praetor.git'
+✅ Git push complete.
+🔄 Change detected: fallback-build-manifest.json.tmp.vj5o0kbdtma (MODIFY)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
