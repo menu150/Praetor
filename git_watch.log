@@ -191987,3 +191987,10 @@ error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
 error: RPC failed; curl 6 Recv failure: Network is unreachable
 send-pack: unexpected disconnect while reading sideband packet
+[main 4f121abc] Real-time update: 2025-07-11 15:50:18
+ 1 file changed, 9 insertions(+)
+fatal: unable to access 'https://github.com/menu150/praetor.git/': Could not resolve host: github.com
+✅ Git push complete.
+🔄 Change detected: pages-manifest.json.tmp.k6lwolrb1xk (MODIFY)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
