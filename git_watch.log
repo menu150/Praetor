@@ -167904,3 +167904,14 @@ To https://github.com/menu150/praetor.git
 🔄 Change detected: [turbopack]_runtime.js.map (DELETE)
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
+[main 5b2552c5] Real-time update: 2025-07-11 13:41:31
+ 1 file changed, 10 insertions(+)
+remote: This repository moved. Please use the new location:        
+remote:   https://github.com/menu150/Praetor.git        
+To https://github.com/menu150/praetor.git
+ ! [remote rejected]   main -> main (cannot lock ref 'refs/heads/main': is at 6bbe3cf58ce9fb7ad6b4f83a923086ef0abf979c but expected bcc46e6c88129b833fba2b3dadaf9ec029f620ae)
+error: failed to push some refs to 'https://github.com/menu150/praetor.git'
+✅ Git push complete.
+🔄 Change detected: [turbopack]_browser_dev_hmr-client_hmr-client_ts_cd763190._.js (DELETE)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
