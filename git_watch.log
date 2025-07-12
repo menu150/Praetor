@@ -358158,3 +358158,21 @@ error: additionally, your index contains uncommitted changes.
 error: Please commit or stash them.
 Auto packing the repository in background for optimum performance.
 See "git help gc" for manual housekeeping.
+[main d2627141a] Real-time update: 2025-07-11 22:04:49
+ 1 file changed, 57 insertions(+)
+Auto packing the repository in background for optimum performance.
+See "git help gc" for manual housekeeping.
+To https://github.com/menu150/praetor.git
+ ! [rejected]            main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/menu150/praetor.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+✅ Git push complete.
+🔄 Change detected: cloudflared.deb (MODIFY)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+[main 7155db605] Real-time update: 2025-07-11 22:04:50
+ 1 file changed, 15 insertions(+)
