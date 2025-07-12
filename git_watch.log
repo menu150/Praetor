@@ -324071,3 +324071,17 @@ error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
 [main d81b64cd] Real-time update: 2025-07-11 21:52:28
  1 file changed, 14 insertions(+)
+[main bc54289e] Real-time update: 2025-07-11 21:52:29
+ 1 file changed, 14 insertions(+)
+To https://github.com/menu150/praetor.git
+ ! [rejected]          main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/menu150/praetor.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+✅ Git push complete.
+🔄 Change detected: cloudflared.deb (MODIFY)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
