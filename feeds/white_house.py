@@ -1,7 +1,7 @@
 import feedparser
 from datetime import datetime
 
-WHITE_HOUSE_RSS = "https://www.whitehouse.gov/briefing-room/feed/"
+WHITE_HOUSE_RSS = "https://www.whitehouse.gov/news/feed/"
 
 def pull_white_house_feed(limit=10):
     feed = feedparser.parse(WHITE_HOUSE_RSS)
