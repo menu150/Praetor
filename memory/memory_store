@@ -1,0 +1,11 @@
+import json
+import os
+from datetime import datetime
+
+MEMORY_DIR = "memory/data/"
+
+def store_rss_entry(item, namespace="white_house"):
+    os.makedirs(MEMORY_DIR, exist_ok=True)
+    fname = f"{MEMORY_DIR}{namespace}_{datetime.now().isoformat()}.json"
+    with open(fname, "w") as f:
+        json.dump(item, f, indent=2)
