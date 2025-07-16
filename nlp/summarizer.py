@@ -1,8 +1,20 @@
 # summarizer.py
 import openai
 import os
+import logging
 
+logger = logging.getLogger(__name__)
 openai.api_key = os.getenv("OPENAI_API_KEY")
+
+def log_event_json(event_type, message, data=None):
+    event = {
+        "timestamp": datetime.now().isoformat(),
+        "event_type": event_type,
+        "message": message,
+        "data": data or {}
+    }
+    with open("logs/analyst_events.jsonl", "a") as log_file:
+        log_file.write(json.dumps(event) + "\n")
 
 def summarize_rss_item(item):
     prompt = f"""

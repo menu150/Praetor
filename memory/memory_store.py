@@ -1,7 +1,10 @@
 # memory_store.py
 import os
 import json
+import logging
 from datetime import datetime
+
+logger = logging.getlogger(_name_)
 
 def store_rss_entry(item, namespace="white_house"):
     timestamp = datetime.now().isoformat()

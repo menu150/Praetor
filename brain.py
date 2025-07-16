@@ -5,7 +5,7 @@ import subprocess
 import importlib
 import pkgutil
 from datetime import datetime
-
+from skills.weather_skill import get_weather
 import openai
 import numpy as np
 

@@ -1,4 +1,9 @@
 # classifier.py
+import open ai
+import logging
+
+logger = logging.getlogger(_name_)
+
 def classify_event(item):
     prompt = f"""
 Classify the following government news article into one or more of the following categories:
@@ -29,6 +34,11 @@ Summary: {item.get('ai_summary') or item['summary']}
             temperature=0,
             max_tokens=100
         )
-        return eval(response.choices[0].message['content'].strip())
+ result = eval(response.choices[0].message['content'].strip())
+        log_event_json("classification", "Article classified", {"title": item['title'], "classification": result})
+        return result
     except Exception as e:
+        logger.error(f"[CLASSIFICATION ERROR] {e}")
+        log_event_json("error", "Classification failure", {"error": str(e), "title": item.get('title', '')})
         return [f"[CLASSIFICATION ERROR] {str(e)}"]
+

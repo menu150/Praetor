@@ -1,10 +1,17 @@
 # feeds/white_house.py
 import feedparser
 from datetime import datetime
-from summarizer import summarize_rss_item
-from classifier import classify_event
-from memory.memory_store import store_rss_entry
+from praetor.nlp.summarizer import summarize_rss_item
+from praetor.nlp.classifier import classify_event
+from praetor.memory.memory_store import store_rss_entry
 import uuid
+import logging
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='[%(asctime)s] [%(levelname)s] %(message)s',
+    handlers=[logging.StreamHandler()]
+)
 
 WHITE_HOUSE_RSS = "https://www.whitehouse.gov/news/feed/"
 
@@ -32,3 +39,5 @@ def parse_timestamp(ts_struct):
 
 if __name__ == "__main__":
     pull_white_house_feed()
+
+print("[✔] white_house.py executed successfully")

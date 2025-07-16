@@ -1,7 +1,10 @@
 # memory_reader.py
 import os
 import json
+import logging
 from datetime import datetime
+
+logger = logging.getlogger(_name_)
 
 def get_recent_events(directory="memory/data", limit=20, filters=None):
     filters = filters or {}
@@ -18,6 +21,7 @@ def get_recent_events(directory="memory/data", limit=20, filters=None):
                         if len(events) >= limit:
                             break
             except Exception:
+	        logger.warning(f"[READ ERROR] {e}")
                 continue
 
     return events
