@@ -1,9 +1,40 @@
-# Ignore local env file containing secrets
+# === ENV & Secrets ===
 .env
-.env
-# Ignore virtual environment
+.env.*
+
+# === Python ===
 venv/
 __pycache__/
-*.pyc
-*.log
+*.py[cod]
+*.pyo
+*.db
+*.sqlite3
 *.db-journal
+*.log
+
+# === Node/Next.js ===
+node_modules/
+.next/
+npm-debug.log
+yarn-error.log
+package-lock.json
+pnpm-lock.yaml
+
+# === Local Backup or Temp ===
+dashboard-backup/
+logs/
+tmp/
+.DS_Store
+
+# === Build Artifacts ===
+dist/
+build/
+*.egg-info/
+
+# === VSCode ===
+.vscode/
+*.code-workspace
+
+# === System Files ===
+Thumbs.db
+desktop.ini
