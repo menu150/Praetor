@@ -9,24 +9,31 @@ from skills.weather_skill import get_weather
 import openai
 import numpy as np
 
-import memory_core as memory
+# Memory core imports
+from memory.memory_core import get_connection, load_all_skills
 from brain_state import COMMANDS, PY_SKILL_RUNNERS, SKILL_LIST
 
 # Initialize OpenAI API key
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # Initialize persistent memory (SQLite)
-conn = memory.init_db()
+conn = get_connection()
 
 # Embeddings cache for fuzzy matching
 TRIGGER_EMBEDDINGS = {}
 
+# Shortcut for subprocess silence
 from subprocess import DEVNULL
 
 def load_skills(skill_dir="skills"):
+    """
+    Load JSON-defined skills from disk and from the database.
+    Populates SKILL_LIST and COMMANDS.
+    """
     SKILL_LIST.clear()
     COMMANDS.clear()
 
+    # Load file-based JSON skills
     if os.path.isdir(skill_dir):
         for filename in os.listdir(skill_dir):
             if filename.endswith(".json"):
@@ -43,12 +50,14 @@ def load_skills(skill_dir="skills"):
                 except Exception as e:
                     print(f"[⚠️] Failed to load {filename}: {e}")
 
-    for trig, action, cmd in memory.load_all_skills(conn):
+    # Load DB-backed skills
+    for trig, action, cmd in load_all_skills(conn):
         skill = {"triggers": [trig], "action": action, "path_or_command": cmd}
         SKILL_LIST.append(skill)
-        COMMANDS[trig] = {"action": action, "path_or_command": cmd}
+        COMMANDS[trig.lower()] = {"action": action, "path_or_command": cmd}
 
-    for trig in COMMANDS:
+    # Precompute embeddings for fuzzy match
+    for trig in list(COMMANDS.keys()):
         if trig not in TRIGGER_EMBEDDINGS:
             try:
                 resp = openai.embeddings.create(
@@ -60,8 +69,13 @@ def load_skills(skill_dir="skills"):
             except Exception as e:
                 print(f"[⚠️] Embedding error for '{trig}': {e}")
 
+
 def load_py_skills(pkg_dir="skills_py"):
-    for _, name, _ in pkgutil.iter_modules([pkg_dir]):
+    """
+    Dynamically import Python skills modules under skills_py/.
+    Each module must define `triggers` list and a `run()` function.
+    """
+    for finder, name, ispkg in pkgutil.iter_modules([pkg_dir]):
         try:
             module = importlib.import_module(f"{pkg_dir}.{name}")
             if hasattr(module, "triggers") and hasattr(module, "run"):
@@ -72,9 +86,13 @@ def load_py_skills(pkg_dir="skills_py"):
         except Exception as e:
             print(f"[⚠️] Failed to load Python skill '{name}': {e}")
 
+
 def build_system_prompt():
+    """
+    Construct a system prompt listing all loaded skills for the LLM.
+    """
     prompt = (
-        "You are Praetor, an intelligent AI brain that routes user commands to available system actions.\n\n"
+        "You are Praetor, an AI brain routing user commands to system actions.\n\n"
         "Available JSON/DB skills:\n"
     )
     for skill in SKILL_LIST:
@@ -87,23 +105,28 @@ def build_system_prompt():
         prompt += f"- '{key}' -> module {runner.__module__}\n"
 
     prompt += (
-        "\nRespond with valid JSON: {\"actions\": [ {\"action\": ..., \"path_or_command\": ...} ] }\n"
+        "\nRespond with JSON exactly like: {\"actions\": [ {\"action\": ..., \"path_or_command\": ...} ] }"
     )
     return prompt
 
+
 def get_gpt_actions(user_input):
+    """
+    Ask the LLM to choose actions based on the system prompt and user_input.
+    Returns a list of action dicts.
+    """
     system_prompt = build_system_prompt()
     messages = [
         {"role": "system", "content": system_prompt},
         {"role": "user",   "content": user_input}
     ]
     try:
-        response = openai.chat.completions.create(
+        resp = openai.chat.completions.create(
             model="gpt-4o-mini",
             messages=messages,
             temperature=0
         )
-        content = response.choices[0].message.content
+        content = resp.choices[0].message.content
     except Exception as e:
         print(f"[⚠️] GPT error: {e}")
         return []
@@ -116,7 +139,11 @@ def get_gpt_actions(user_input):
         print(f"[⚠️] Failed to parse GPT JSON: {cleaned}")
         return []
 
+
 def execute_action(action_cfg):
+    """
+    Execute a single action dict returned by get_gpt_actions().
+    """
     action = action_cfg.get("action")
     path = action_cfg.get("path_or_command", "")
     print(f"[⚙️] Executing '{action}' -> '{path}'")
@@ -125,11 +152,7 @@ def execute_action(action_cfg):
             now = datetime.now().strftime("%H:%M")
             print(f"[⏰] Current time: {now}")
         elif action == "subprocess":
-            subprocess.Popen(
-                path.split(),
-                stdout=DEVNULL,
-                stderr=DEVNULL
-            )
+            subprocess.Popen(path.split(), stdout=DEVNULL, stderr=DEVNULL)
         elif action == "system":
             subprocess.run(path, shell=True, check=True)
         elif action == "script":
@@ -139,16 +162,20 @@ def execute_action(action_cfg):
     except Exception as e:
         print(f"[⚠️] Execution error: {e}")
 
+
 def handle_command(user_input):
+    """
+    Top‑level entry: sends user_input to the LLM, then runs all chosen actions.
+    """
     actions = get_gpt_actions(user_input)
     if not actions:
         print("[❓] No actions returned.")
         return
-
     for act in actions:
         execute_action(act)
+
 
 if __name__ == "__main__":
     load_skills()
     load_py_skills()
-    print("[✅] Brain module loaded. Use the Flask API to interact with Praetor.")
+    print("[✅] Brain module loaded. Use handle_command() or your API to invoke it.")
