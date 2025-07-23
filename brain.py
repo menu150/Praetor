@@ -5,23 +5,30 @@ import subprocess
 import importlib
 import pkgutil
 from datetime import datetime
-from skills.weather_skill import get_weather
+from subprocess import DEVNULL
+
 import openai
 import numpy as np
 
-import memory_core as memory
+from memory.memory_core import get_connection, load_all_skills
+from skills.weather_skill import get_weather
 from brain_state import COMMANDS, PY_SKILL_RUNNERS, SKILL_LIST
 
-# Initialize OpenAI API key
+# 1) Init OpenAI key
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-# Initialize persistent memory (SQLite)
-conn = memory.init_db()
+# 2) Init your SQLite connection
+conn = get_connection("praetor_memory.db")
 
-# Embeddings cache for fuzzy matching
+# 3) Preload & cache all trigger embeddings
 TRIGGER_EMBEDDINGS = {}
-
-from subprocess import DEVNULL
+for trigger, action, cmd in load_all_skills(conn):
+    resp = openai.Embedding.create(
+        input=[trigger],
+        model="text-embedding-ada-002"
+    )
+    emb = resp["data"][0]["embedding"]
+    TRIGGER_EMBEDDINGS[trigger] = emb
 
 def load_skills(skill_dir="skills"):
     SKILL_LIST.clear()
