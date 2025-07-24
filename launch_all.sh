@@ -8,7 +8,9 @@ echo "[🧠] Starting Praetor Brain..."
 nohup python3 brain.py > logs/brain.log 2>&1 &
 
 echo "[🖥️] Starting Dashboard..."
-nohup npm run dev > logs/dashboard.log 2>&1 &
+cd ~/praetor/dashboard
+nohup npm run dev > ../logs/dashboard.log 2>&1 &
+cd ..
 
 echo "[🌐] Launching Cloudflare Tunnel..."
 nohup cloudflared tunnel run praetor > logs/tunnel.log 2>&1 &
