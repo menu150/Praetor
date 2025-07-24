@@ -54,3 +54,6 @@ def save_message(message: str, namespace: str = "default", conn=None):
         (namespace, datetime.utcnow().isoformat(), message)
     )
     conn.commit()
+# ─── auto-create messages table on module import ───────────────────
+# this runs as soon as anything “import memory.memory_core”
+init_db()
