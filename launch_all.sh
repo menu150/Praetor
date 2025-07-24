@@ -18,4 +18,9 @@ nohup cloudflared tunnel run praetor > logs/tunnel.log 2>&1 &
 # nohup python3 voice_loop.py > logs/voice.log 2>&1 &
 
 echo "[✅] All Praetor services launched."
- 
+
+# Add more agents/skills here
+# nohup python3 memory_agent.py > logs/memory.log 2>&1 &
+
+# Keeps systemd alive
+while true; do sleep 30; done
