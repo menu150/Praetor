@@ -1,7 +1,7 @@
 # /skills_py/news.py
 
 import requests
-from memory import save_message  # or your memory write method
+from memory.memory_core import save_message  # or your memory write method
 
 API_KEY = "your-newsapi-key"
 NEWS_URL = "https://newsapi.org/v2/top-headlines"
