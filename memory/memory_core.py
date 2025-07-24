@@ -1,22 +1,32 @@
 import sqlite3
+from datetime import datetime
 
-
-def get_connection(db_path="praetor_memory.db"):
+def init_db(conn=None, db_path="praetor_memory.db"):
     """
-    Return a sqlite3 connection to the memory database.
+    Ensure the messages table exists.
     """
-    conn = sqlite3.connect(db_path)
-    conn.row_factory = sqlite3.Row
+    conn = conn or get_connection(db_path)
+    cur = conn.cursor()
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS messages (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            namespace TEXT,
+            timestamp TEXT,
+            message TEXT
+        )
+    """)
+    conn.commit()
     return conn
 
-
-def load_all_skills(conn):
+def save_message(message: str, namespace: str = "default", conn=None):
     """
-    Load all skills from the skills table and return a list of tuples
-    (trigger, action, path_or_command).
+    Persist a message to the messages table.
     """
-    cursor = conn.cursor()
-    cursor.execute(
-        "SELECT trigger, action, path_or_command FROM skills"
+    # make sure table exists
+    conn = init_db(conn)
+    cur = conn.cursor()
+    cur.execute(
+        "INSERT INTO messages (namespace, timestamp, message) VALUES (?, ?, ?)",
+        (namespace, datetime.utcnow().isoformat(), message)
     )
-    return cursor.fetchall()
+    conn.commit()
