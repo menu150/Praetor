@@ -1,5 +1,5 @@
 # skills_py/news.py
-
+import os
 import requests
 import logging
 from memory.memory_core import save_message
@@ -11,6 +11,13 @@ NEWS_URL = "https://newsapi.org/v2/top-headlines"
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s: %(message)s")
 
+# Load API key from environment variable
+API_KEY = os.getenv("NEWSAPI_API_KEY")
+if not API_KEY:
+    target_logger.error("Environment variable NEWSAPI_API_KEY is not set.")
+    raise RuntimeError("Missing NEWSAPI_API_KEY. Please set it in your environment before running.")
+
+NEWS_URL = "https://newsapi.org/v2/top-headlines"
 
 def run_news_fetch():
     """
