@@ -1,0 +1,7 @@
+{
+  "triggers": [
+    "turn off monitor"
+  ],
+  "action": "system",
+  "path_or_command": "xset dpms force off"
+}

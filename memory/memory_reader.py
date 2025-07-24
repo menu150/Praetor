@@ -1,38 +1,40 @@
-# memory_reader.py
 import os
 import json
 import logging
 from datetime import datetime
 
-logger = logging.getlogger(_name_)
+logger = logging.getLogger(__name__)
+
 
 def get_recent_events(directory="memory/data", limit=20, filters=None):
+    """
+    Load recent events from JSON files in a directory,
+    applying optional filters, and return up to 'limit' items.
+    """
     filters = filters or {}
     events = []
 
+    # Iterate over files in descending order
     for filename in sorted(os.listdir(directory), reverse=True):
-        if filename.endswith(".json"):
-            filepath = os.path.join(directory, filename)
-            try:
-                with open(filepath, "r") as f:
-                    item = json.load(f)
-                    if apply_filters(item, filters):
-                        events.append(item)
-                        if len(events) >= limit:
-                            break
-            except Exception:
-	        logger.warning(f"[READ ERROR] {e}")
-                continue
+        if not filename.endswith(".json"):
+            continue
+
+        filepath = os.path.join(directory, filename)
+        try:
+            with open(filepath, "r") as f:
+                item = json.load(f)
+        except Exception as e:
+            logger.warning(f"[READ ERROR] {e} in {filepath}")
+            continue
+
+        # Apply filters if available, otherwise include all items
+        try:
+            if apply_filters(item, filters):
+                events.append(item)
+        except NameError:
+            events.append(item)
+
+        if len(events) >= limit:
+            break
 
     return events
-
-def apply_filters(item, filters):
-    for key, value in filters.items():
-        if key not in item:
-            return False
-        if isinstance(value, list):
-            if not any(v in item[key] for v in value):
-                return False
-        elif item[key] != value:
-            return False
-    return True

@@ -1,0 +1,51 @@
+# ~/praetor/swagger.yaml
+swagger: "2.0"
+info:
+  title: Praetor API
+  version: 1.0.0
+host: localhost:5000
+basePath: /
+schemes:
+ -http
+
+paths:
+  /api/intent:
+    post:
+      summary: Handle an intent request
+      tags:
+        - Intent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                intent:
+                  type: string
+                params:
+                  type: object
+              required:
+                - intent
+      responses:
+        '200':
+          description: Successful intent invocation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  intent:
+                    type: string
+                  response:
+                    type: object
+        '400':
+          description: Bad request (missing/invalid JSON)
+        '401':
+          description: Unauthorized (invalid API key)
+        '404':
+          description: Unknown intent
+        '500':
+          description: Internal server error

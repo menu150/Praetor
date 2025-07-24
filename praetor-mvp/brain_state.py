@@ -1,0 +1,3 @@
+COMMANDS = {}
+PY_SKILL_RUNNERS = {}
+SKILL_LIST = []

@@ -1,0 +1,12 @@
+{
+  "id": "e6df7f98-68a5-4dc3-8b80-360bfd172018",
+  "source": "whitehouse.gov",
+  "title": "Americans Celebrate the One Big Beautiful Bill’s Transformational Policies",
+  "summary": "<p>A week after President Donald J. Trump signed the historic One Big Beautiful Bill into law, Americans across the country are celebrating its many benefits. From farmers securing their family legacies to service workers gaining financial breathing room, the bill’s bold policies will make a real difference in Americans’ lives.</p>\n<p>The post <a href=\"https://www.whitehouse.gov/articles/2025/07/americans-celebrate-the-one-big-beautiful-bills-transformational-policies/\">Americans Celebrate the One Big Beautiful Bill’s Transformational Policies</a> appeared first on <a href=\"https://www.whitehouse.gov\">The White House</a>.</p>",
+  "link": "https://www.whitehouse.gov/articles/2025/07/americans-celebrate-the-one-big-beautiful-bills-transformational-policies/",
+  "published": "2025-07-11T20:33:16",
+  "ai_summary": "[SUMMARY ERROR] \n\nYou tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.\n\nYou can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. \n\nAlternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`\n\nA detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742\n",
+  "classification": [
+    "[CLASSIFICATION ERROR] name 'openai' is not defined"
+  ]
+}

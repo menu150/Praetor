@@ -1,0 +1,12 @@
+{
+  "id": "17aaaeed-8d2b-4e52-a96f-2f706e6dfb12",
+  "source": "whitehouse.gov",
+  "title": "Taxpayer-Funded Benefits Are for American Citizens — Not Illegals",
+  "summary": "<p>Today, at the direction of President Donald J. Trump, the Administration is taking the biggest step in more than 30 years to protect taxpayer-funded benefits for American citizens — NOT illegal aliens. The move, which preserves roughly $40 billion in benefits for American citizens, overturns decades of bureaucratic defiance and builds on President Trump’s executive [&#8230;]</p>\n<p>The post <a href=\"https://www.whitehouse.gov/articles/2025/07/taxpayer-funded-benefits-are-for-american-citizens-not-illegals/\">Taxpayer-Funded Benefits Are for American Citizens — Not Illegals</a> appeared first on <a href=\"https://www.whitehouse.gov\">The White House</a>.</p>",
+  "link": "https://www.whitehouse.gov/articles/2025/07/taxpayer-funded-benefits-are-for-american-citizens-not-illegals/",
+  "published": "2025-07-10T18:47:28",
+  "ai_summary": "[SUMMARY ERROR] \n\nYou tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.\n\nYou can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. \n\nAlternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`\n\nA detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742\n",
+  "classification": [
+    "[CLASSIFICATION ERROR] name 'openai' is not defined"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "triggers": [
+    "add user"
+  ],
+  "action": "system",
+  "path_or_command": "sudo adduser"
+}

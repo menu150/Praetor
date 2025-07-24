@@ -1,0 +1,5 @@
+{
+  "triggers": ["what time is it", "tell me the time", "current time"],
+  "action": "say_time",
+  "path_or_command": ""
+}

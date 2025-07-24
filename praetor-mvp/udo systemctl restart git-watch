@@ -1,0 +1,13 @@
+[0;1;32m●[0m git-watch.service - Praetor Git Watch Daemon
+     Loaded: loaded (]8;;file://Praetor/etc/systemd/system/git-watch.service/etc/systemd/system/git-watch.service]8;;; [0;1;32menabled[0m; preset: [0;1;32menabled[0m)
+     Active: [0;1;32mactive (running)[0m since Wed 2025-07-09 22:07:33 CDT; 5s ago
+   Main PID: 2793003 (bash)
+      Tasks: 3 (limit: 28563)
+     Memory: 2.0M (peak: 2.2M)
+        CPU: 133ms
+     CGroup: /system.slice/git-watch.service
+             ├─[0;38;5;245m2793003 bash /home/menu150/praetor/git_watch.sh[0m
+             ├─[0;38;5;245m2793007 inotifywait -m -r -e modify,create,delete --exclude "(\\.git|venv|__pycache__|\\.log)" .[0m
+             └─[0;38;5;245m2793008 bash /home/menu150/praetor/git_watch.sh[0m
+
+Jul 09 22:07:33 Praetor systemd[1]: Started git-watch.service - Praetor Git Watch Daemon.

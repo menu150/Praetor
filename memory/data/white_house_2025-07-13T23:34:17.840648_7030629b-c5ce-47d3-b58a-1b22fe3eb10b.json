@@ -1,0 +1,12 @@
+{
+  "id": "7030629b-c5ce-47d3-b58a-1b22fe3eb10b",
+  "source": "whitehouse.gov",
+  "title": "President Trump, First Lady See Unbreakable Spirit in Texas",
+  "summary": "<p>Yesterday, President Donald J. Trump and First Lady Melania Trump traveled to Kerr County, Texas, in the aftermath of last weekend’s catastrophic floods. The President and First Lady surveyed the devastation, met with community members and local officials, thanked heroic first responders, and pledged the Administration’s ongoing support as the community recovers. President Trump delivered [&#8230;]</p>\n<p>The post <a href=\"https://www.whitehouse.gov/articles/2025/07/president-trump-first-lady-see-unbreakable-spirit-in-texas/\">President Trump, First Lady See Unbreakable Spirit in Texas</a> appeared first on <a href=\"https://www.whitehouse.gov\">The White House</a>.</p>",
+  "link": "https://www.whitehouse.gov/articles/2025/07/president-trump-first-lady-see-unbreakable-spirit-in-texas/",
+  "published": "2025-07-12T23:24:45",
+  "ai_summary": "[SUMMARY ERROR] \n\nYou tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.\n\nYou can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. \n\nAlternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`\n\nA detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742\n",
+  "classification": [
+    "[CLASSIFICATION ERROR] name 'openai' is not defined"
+  ]
+}

@@ -10,29 +10,25 @@ from subprocess import DEVNULL
 import openai
 import numpy as np
 
-<<<<<<< HEAD
+
 from memory.memory_core import get_connection, load_all_skills
 from skills.weather_skill import get_weather
-=======
+
 # Memory core imports
 from memory.memory_core import get_connection, load_all_skills
->>>>>>> e862d55d1f3294f2bdf2f48d32aefc647342a3c6
 from brain_state import COMMANDS, PY_SKILL_RUNNERS, SKILL_LIST
 
 # 1) Init OpenAI key
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-<<<<<<< HEAD
 # 2) Init your SQLite connection
 conn = get_connection("praetor_memory.db")
-=======
+
 # Initialize persistent memory (SQLite)
 conn = get_connection()
->>>>>>> e862d55d1f3294f2bdf2f48d32aefc647342a3c6
 
 # 3) Preload & cache all trigger embeddings
 TRIGGER_EMBEDDINGS = {}
-<<<<<<< HEAD
 for trigger, action, cmd in load_all_skills(conn):
     resp = openai.Embedding.create(
         input=[trigger],
@@ -40,11 +36,11 @@ for trigger, action, cmd in load_all_skills(conn):
     )
     emb = resp["data"][0]["embedding"]
     TRIGGER_EMBEDDINGS[trigger] = emb
-=======
+
 
 # Shortcut for subprocess silence
 from subprocess import DEVNULL
->>>>>>> e862d55d1f3294f2bdf2f48d32aefc647342a3c6
+
 
 def load_skills(skill_dir="skills"):
     """
