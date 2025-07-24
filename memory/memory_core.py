@@ -1,6 +1,9 @@
 import sqlite3
 from datetime import datetime
 
+BASE_DIR = os.path.dirname(__file__)
+DEFAULT_DB = os.path.join(BASE_DIR, "praetor_memory.db")
+
 def init_db(conn=None, db_path="praetor_memory.db"):
     """
     Ensure the messages table exists.
