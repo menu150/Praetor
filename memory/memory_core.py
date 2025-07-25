@@ -13,7 +13,7 @@ DEFAULT_DB = os.path.join(BASE_DIR, "praetor_memory.db")
 # ─── Schema Initialization ──────────────────────────────────────────
 def init_db(conn=None, db_path=DEFAULT_DB):
     """
-    Ensure the messages table exists (with an embedding BLOB column).
+    Ensure the messages and skills tables exist.
     """
     conn = conn or sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row
@@ -27,17 +27,6 @@ def init_db(conn=None, db_path=DEFAULT_DB):
             embedding BLOB
         )
     """)
-
-    # ensure skills table exists
-    cur.execute("""
-        CREATE TABLE IF NOT EXISTS skills (
-            trigger         TEXT PRIMARY KEY,
-            action          TEXT,
-            path_or_command TEXT
-        )
-    """)
-
- # ─── Add skills table ───────────────────────────────
     cur.execute("""
         CREATE TABLE IF NOT EXISTS skills (
             trigger         TEXT PRIMARY KEY,
@@ -56,7 +45,7 @@ def get_connection(db_path=DEFAULT_DB):
     """
     return init_db(sqlite3.connect(db_path), db_path)
 
-# ─── Skill Loader (unchanged) ───────────────────────────────────────
+# ─── Load skills (DB) ──────────────────────────────────────────────
 def load_all_skills(conn):
     cursor = conn.cursor()
     cursor.execute(
@@ -77,9 +66,8 @@ def save_message(
     conn = conn or get_connection()
     cur  = conn.cursor()
 
-    # 1) Compute embedding for the message (v1 API)
+    # 1) Compute embedding for the message
     resp = openai.embeddings.create(input=[message], model=embedding_model)
-    # use the v1 client oject API
     emb  = resp.data[0].embedding      # list of floats
     blob = sqlite3.Binary(pickle.dumps(emb))
 
@@ -98,7 +86,8 @@ def recall_recent(limit: int = 5, conn: sqlite3.Connection = None) -> list[str]:
     conn = conn or get_connection()
     cur  = conn.cursor()
     cur.execute("SELECT message FROM messages ORDER BY id DESC LIMIT ?", (limit,))
-    return [r["message"] for r in cur.fetchall()]
+    return [r[0] for r in cur.fetchall()]
+
 
 def recall_relevant(
     query: str,
@@ -113,11 +102,9 @@ def recall_relevant(
     conn = conn or get_connection()
     cur  = conn.cursor()
 
-    # 1) Embed the query (v1 API)
-
-    resp = openai.embeddings.create(input=[message], model=embedding_model)
-    # use the v1 client object API
-    emb  = resp.data[0].embedding            # list of floats
+    # 1) Embed the query
+    resp = openai.embeddings.create(input=[query], model=embedding_model)
+    q_emb = resp.data[0].embedding    # list of floats
 
     # 2) Fetch stored embeddings
     cur.execute("SELECT message, embedding FROM messages WHERE embedding IS NOT NULL")
@@ -125,17 +112,17 @@ def recall_relevant(
     for msg, emb_blob in cur.fetchall():
         mem_emb = pickle.loads(emb_blob)  # list of floats
 
-    # 3) cosine similarity via pure-Python
-    dot    = sum(qe * me for qe, me in zip(q_emb, mem_emb))
-    norm_q = math.sqrt(sum(qe * qe for qe in q_emb))
-    norm_m = math.sqrt(sum(me * me for me in mem_emb))
-    score  = dot / (norm_q * norm_m) if norm_q and norm_m else 0.0
+        # 3) cosine similarity via pure-Python
+        dot    = sum(qe * me for qe, me in zip(q_emb, mem_emb))
+        norm_q = math.sqrt(sum(qe * qe for qe in q_emb))
+        norm_m = math.sqrt(sum(me * me for me in mem_emb))
+        score  = dot / (norm_q * norm_m) if norm_q and norm_m else 0.0
 
-    sims.append((msg, score))
+        sims.append((msg, score))
 
     # 4) sort & return top-N by score
     sims.sort(key=lambda x: x[1], reverse=True)
     return sims[:limit]
 
-# ─── Auto-init on import ────────────────────────────────────────────
+# ─── Auto-init on import ───────────────────────────────────────────
 init_db()
