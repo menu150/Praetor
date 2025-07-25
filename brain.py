@@ -98,94 +98,49 @@ def load_py_skills(pkg_dir="skills_py"):
 
 # ─── Build Prompt & Invoke LLM ─────────────────────────────────────
 def build_system_prompt(user_input: str):
-    recent   = recall_recent(limit=3)
+    """
+    Construct a system prompt that injects both recent and relevant memories
+    and lists available skills.
+    """
+    # 1) Fetch memory snippets
+    recent = recall_recent(limit=3)
     relevant = recall_relevant(query=user_input, limit=3)
 
-    recent_block = ""
+    # 2) Format into blocks
+    recent_block = "
 ".join(f"- {m}" for m in recent) or "*(no recent memories)*"
     relevant_block = "
 ".join(f"- {m} (score {s:.2f})" for m, s in relevant) or "*(no relevant memories)*"
 
-    prompt = (
-        "You are Praetor, a memory-aware AI assistant.
-
-"
-        "Recent memories (most recent first):
-"
-        f"{recent_block}
-
-"
-        "Contextually relevant memories:
-"
-        f"{relevant_block}
-
-"
-        "Available skills:
-"
-    )
+    # 3) Build the prompt lines
+    prompt_lines = [
+        "You are Praetor, a memory-aware AI assistant.",
+        "",
+        "Recent memories (most recent first):",
+        recent_block,
+        "",
+        "Contextually relevant memories:",
+        relevant_block,
+        "",
+        "Available skills:",
+    ]
     for skill in SKILL_LIST:
         triggers = skill.get("triggers", [])
-        cmd      = skill.get("path_or_command", "")
-        prompt  += f"- {skill['action']}: triggers {triggers}, executes '{cmd}'
-"
-
-    prompt += (
-        "
-Respond with JSON exactly like: {\"actions\": [ {\"action\": ..., \"path_or_command\": ...} ] }"
-    )
-    return prompt
-
-
-def get_gpt_actions(user_input: str):
-    system_prompt = build_system_prompt(user_input)
-    messages = [
-        {"role": "system",  "content": system_prompt},
-        {"role": "user",    "content": user_input}
-    ]
-    try:
-        resp = openai.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=messages,
-            temperature=0
+        cmd = skill.get("path_or_command", "")
+        prompt_lines.append(
+            f"- {skill['action']}: triggers {triggers}, executes '{cmd}'"
         )
-        cleaned = resp.choices[0].message.content.strip().lstrip("```json").rstrip("```
-")
-        result  = json.loads(cleaned)
-        return result.get("actions", [])
-    except Exception as e:
-        print(f"[⚠️] GPT error: {e}")
-        return []
 
+    prompt_lines.append("")
+    prompt_lines.append(
+        'Respond with JSON exactly like: {"actions": [ {"action": ..., "path_or_command": ...} ] }'
+    )
 
-def execute_action(action_cfg: dict):
-    action = action_cfg.get("action")
-    path   = action_cfg.get("path_or_command", "")
-    print(f"[⚙️] Executing '{action}' -> '{path}'")
-    try:
-        if action == "say_time":
-            now = datetime.now().strftime("%H:%M")
-            print(f"[⏰] Current time: {now}")
-        elif action == "subprocess":
-            subprocess.Popen(path.split(), stdout=DEVNULL, stderr=DEVNULL)
-        elif action == "system":
-            subprocess.run(path, shell=True, check=True)
-        elif action == "script":
-            subprocess.run(["bash", path], check=True)
-        else:
-            print(f"[❌] Unknown action '{action}'")
-    except Exception as e:
-        print(f"[⚠️] Execution error: {e}")
+    # 4) Join into single string
+    return "
+".join(prompt_lines)
 
-
-def handle_command(user_input: str):
-    actions = get_gpt_actions(user_input)
-    if not actions:
-        print("[❓] No actions returned.")
-        return
-    for act in actions:
-        execute_action(act)
-
-
+# ─── Invoke LLM and Execute Actions ─────────────────────────────────
 if __name__ == "__main__":
     load_skills()
     load_py_skills()
