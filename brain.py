@@ -101,7 +101,7 @@ def build_system_prompt(user_input: str):
     recent   = recall_recent(limit=3)
     relevant = recall_relevant(query=user_input, limit=3)
 
-    recent_block =
+    recent_block = ""
 ".join(f"- {m}" for m in recent) or "*(no recent memories)*"
     relevant_block = "
 ".join(f"- {m} (score {s:.2f})" for m, s in relevant) or "*(no relevant memories)*"
