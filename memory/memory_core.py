@@ -22,7 +22,7 @@ def init_db(conn=None, db_path="praetor_memory.db"):
     conn.commit()
     return conn
 
-def get_connection(db_path="praetor_memory.db"):
+def get_connection(db_path="DEFAULT_DB"):
     """
     Return a sqlite3 connection to the memory database,
     and ensure all tables are present.
