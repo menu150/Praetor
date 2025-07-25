@@ -103,16 +103,14 @@ def build_system_prompt(user_input: str):
     and lists available skills.
     """
     # 1) Fetch memory snippets
-    recent = recall_recent(limit=3)
+    recent   = recall_recent(limit=3)
     relevant = recall_relevant(query=user_input, limit=3)
 
-    # 2) Format into blocks
-    recent_block = "
-".join(f"- {m}" for m in recent) or "*(no recent memories)*"
-    relevant_block = "
-".join(f"- {m} (score {s:.2f})" for m, s in relevant) or "*(no relevant memories)*"
+    # 2) Format into bullet blocks
+    recent_block   = "\n".join(f"- {m}" for m in recent) or "*(no recent memories)*"
+    relevant_block = "\n".join(f"- {m} (score {s:.2f})" for m, s in relevant) or "*(no relevant memories)*"
 
-    # 3) Build the prompt lines
+    # 3) Assemble prompt lines
     prompt_lines = [
         "You are Praetor, a memory-aware AI assistant.",
         "",
@@ -126,19 +124,16 @@ def build_system_prompt(user_input: str):
     ]
     for skill in SKILL_LIST:
         triggers = skill.get("triggers", [])
-        cmd = skill.get("path_or_command", "")
+        cmd      = skill.get("path_or_command", "")
         prompt_lines.append(
             f"- {skill['action']}: triggers {triggers}, executes '{cmd}'"
         )
 
     prompt_lines.append("")
-    prompt_lines.append(
-        'Respond with JSON exactly like: {"actions": [ {"action": ..., "path_or_command": ...} ] }'
-    )
+    prompt_lines.append('Respond with JSON exactly like: {"actions": [{"action": ..., "path_or_command": ...}]}')
 
-    # 4) Join into single string
-    return "
-".join(prompt_lines)
+    # 4) Join into one big prompt string
+    return "\n".join(prompt_lines)
 
 # ─── Invoke LLM and Execute Actions ─────────────────────────────────
 if __name__ == "__main__":
