@@ -4,7 +4,7 @@ import requests
 import logging
 from memory.memory_core import save_message
 
-API_KEY = "a6894f6c-bfed-4145-afde-850a5c55fc12"
+API_KEY = "2f3b6e0e73ae484bbfe977bba3e0ebb1"
 NEWS_URL = "https://newsapi.org/v2/top-headlines"
 
 # Configure basic logging
