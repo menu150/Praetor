@@ -28,6 +28,15 @@ def init_db(conn=None, db_path=DEFAULT_DB):
         )
     """)
 
+    # ensure skills table exists
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS skills (
+            trigger         TEXT PRIMARY KEY,
+            action          TEXT,
+            path_or_command TEXT
+        )
+    """)
+
  # ─── Add skills table ───────────────────────────────
     cur.execute("""
         CREATE TABLE IF NOT EXISTS skills (
