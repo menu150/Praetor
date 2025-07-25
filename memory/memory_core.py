@@ -1,9 +1,9 @@
 import os
 import sqlite3
 import pickle
+import math
 from datetime import datetime
 
-import numpy as np
 import openai
 
 # ─── Constants & Paths ──────────────────────────────────────────────
@@ -61,7 +61,7 @@ def save_message(
 
     # 1) Compute embedding for the message
     resp = openai.Embedding.create(input=[message], model=embedding_model)
-    emb  = np.array(resp["data"][0]["embedding"], dtype=np.float32)
+    emb  = resp["data"][0]["embedding"]      # this is already a Python list of floats
     blob = sqlite3.Binary(pickle.dumps(emb))
 
     # 2) Insert row
@@ -96,18 +96,23 @@ def recall_relevant(
 
     # 1) Embed the query
     resp = openai.Embedding.create(input=[query], model=embedding_model)
-    q_emb = np.array(resp["data"][0]["embedding"], dtype=np.float32)
+    q_emb = resp["data"][0]["embedding"]  # list of floats
 
     # 2) Fetch stored embeddings
     cur.execute("SELECT message, embedding FROM messages WHERE embedding IS NOT NULL")
     sims = []
     for msg, emb_blob in cur.fetchall():
-        mem_emb = pickle.loads(emb_blob)
-        score   = float(np.dot(q_emb, mem_emb) /
-                        (np.linalg.norm(q_emb) * np.linalg.norm(mem_emb)))
+        mem_emb = pickle.loads(emb_blob)  # list of floats
+
+        # 3) cosine similarity via pure-Python
+        dot    = sum(qe * me for qe, me in zip(q_emb, mem_emb))
+        norm_q = math.sqrt(sum(qe * qe for qe in q_emb))
+        norm_m = math.sqrt(sum(me * me for me in mem_emb))
+        score  = dot / (norm_q * norm_m) if norm_q and norm_m else 0.0
+
         sims.append((msg, score))
 
-    # 3) Return top-N by score
+    # 4) sort & return top-N by score
     sims.sort(key=lambda x: x[1], reverse=True)
     return sims[:limit]
 
