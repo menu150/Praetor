@@ -104,9 +104,6 @@ def load_py_skills(pkg_dir="skills_py"):
         except Exception as e:
             print(f"[⚠️] Failed to load Python skill '{name}': {e}")
 
-
-def build_system_prompt():
-
 def build_system_prompt(user_input: str):
     """
     Construct a system prompt that injects both recent and relevant memories.
@@ -140,12 +137,13 @@ def build_system_prompt(user_input: str):
         "{\"actions\": [ {\"action\": ..., \"path_or_command\": ...} ] }"
     )
     return prompt
+
 def get_gpt_actions(user_input):
     """
     Ask the LLM to choose actions based on the system prompt and user_input.
     Returns a list of action dicts.
     """
-    system_prompt = build_system_prompt()
+    system_prompt = build_system_prompt(user_input)
     messages = [
         {"role": "system", "content": system_prompt},
         {"role": "user",   "content": user_input}
