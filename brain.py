@@ -156,26 +156,37 @@ def get_gpt_actions(user_input: str):
         return []
 
 # ─── Execute an Action ────────────────────────────────────────────
+
 def execute_action(action_cfg: dict):
     action = action_cfg.get("action")
-    path   = action_cfg.get("path_or_command", "")
-    print(f"[⚙️] Executing '{action}' -> '{path}'")
+    payload = action_cfg.get("path_or_command", "")
+    print(f"[⚙️] Executing '{action}'")
+
     try:
         if action == "say_time":
             now = datetime.now().strftime("%H:%M")
             print(f"[⏰] Current time: {now}")
+
         elif action == "subprocess":
-            subprocess.Popen(path.split(), stdout=DEVNULL, stderr=DEVNULL)
+            subprocess.Popen(payload.split(), stdout=DEVNULL, stderr=DEVNULL)
+
         elif action == "system":
-            subprocess.run(path, shell=True, check=True)
+            subprocess.run(payload, shell=True, check=True)
+
         elif action == "script":
-            subprocess.run(["bash", path], check=True)
+            subprocess.run(["bash", payload], check=True)
+
+        elif action == "summarize":
+            # If the brain asks to summarize, just print the summary text
+            print("[📝 Summary]")
+            print(payload)
+
         else:
             print(f"[❌] Unknown action '{action}'")
+
     except Exception as e:
         print(f"[⚠️] Execution error: {e}")
-
-# ─── Handle User Command ──────────────────────────────────────────
+# ----Handle User Command ──────────────────────────────────────────
 def handle_command(user_input: str):
     actions = get_gpt_actions(user_input)
     if not actions:
