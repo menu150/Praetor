@@ -12,4 +12,6 @@ init_db(db_path=DEFAULT_DB)
 from skills_py.news import run_news_fetch
 
 if __name__ == "__main__":
-    run_news_fetch()
+    # Execute fetcher and print its summary
+    result = run_news_fetch()
+    print(result)
