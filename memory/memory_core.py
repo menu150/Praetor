@@ -16,7 +16,8 @@ def init_db(conn=None, db_path="praetor_memory.db"):
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             namespace TEXT,
             timestamp TEXT,
-            message TEXT
+            message TEXT,
+            embedding BLOB
         )
     """)
     conn.commit()
