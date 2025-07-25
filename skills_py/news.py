@@ -1,57 +1,57 @@
 # skills_py/news.py
+
 import os
-import requests
 import logging
+import requests
+
 from memory.memory_core import save_message
 
-API_KEY = "2f3b6e0e73ae484bbfe977bba3e0ebb1"
-NEWS_URL = "https://newsapi.org/v2/top-headlines"
-
-# Configure basic logging
+# ─── Logger setup ───────────────────────────────────────────────────
 logger = logging.getLogger(__name__)
-logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s: %(message)s")
+handler = logging.StreamHandler()
+formatter = logging.Formatter("%(asctime)s %(levelname)s: %(message)s")
+handler.setFormatter(formatter)
+logger.addHandler(handler)
+logger.setLevel(logging.INFO)
 
-# Load API key from environment variable
+# ─── Configuration ──────────────────────────────────────────────────
 API_KEY = os.getenv("NEWSAPI_API_KEY")
 if not API_KEY:
-    target_logger.error("Environment variable NEWSAPI_API_KEY is not set.")
-    raise RuntimeError("Missing NEWSAPI_API_KEY. Please set it in your environment before running.")
+    logger.error("Environment variable NEWSAPI_API_KEY is not set.")
+    raise RuntimeError("Missing NEWSAPI_API_KEY")
 
 NEWS_URL = "https://newsapi.org/v2/top-headlines"
 
+
 def run_news_fetch():
-    """
-    Fetch top headlines from NewsAPI and persist them to memory,
-    logging each step.
-    """
+    logger.info("Starting news fetch...")
     params = {
         "country": "us",
         "category": "general",
         "apiKey": API_KEY
     }
-    logger.info("Starting news fetch...")
+
     try:
         response = requests.get(NEWS_URL, params=params)
         response.raise_for_status()
-        data = response.json()
     except Exception as e:
-        logger.error("Error fetching news: %s", e)
-        return f"[📰] Error fetching news: {e}"
+        logger.error(f"Error fetching news: {e}")
+        return
 
+    data = response.json()
     articles = data.get("articles", [])
-    logger.info("Fetched %d articles", len(articles))
 
     for article in articles:
-        title = article.get("title", "No Title")
-        summary = article.get("description", "")
-        url = article.get("url", "")
+        title   = article.get("title", "").strip()
+        summary = article.get("description", "").strip()
+        url     = article.get("url", "").strip()
+        message = f"{title}\n{summary}\n{url}"
 
-        # Persist the news item to memory
-        save_message(message=f"{title}\n{summary}\n{url}", namespace="news")
-        logger.info("Saved article: %s", title)
+        save_message(message, namespace="news")
+        logger.info(f"Saved article: {title}")
 
-    return f"[📰] Fetched and saved {len(articles)} news headlines."
+    logger.info(f"Fetched and stored {len(articles)} articles.")
 
 
-# Triggers for invoking this skill
+# List of triggers for the Brain’s dynamic loader
 triggers = ["news", "headlines", "what's in the news"]
