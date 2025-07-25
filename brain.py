@@ -136,6 +136,55 @@ def build_system_prompt(user_input: str):
     return "\n".join(prompt_lines)
 
 # ─── Invoke LLM and Execute Actions ─────────────────────────────────
+
+def get_gpt_actions(user_input: str):
+    system_prompt = build_system_prompt(user_input)
+    messages = [
+        {"role": "system", "content": system_prompt},
+        {"role": "user",   "content": user_input},
+    ]
+    try:
+        resp = openai.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=messages,
+            temperature=0
+        )
+        content = resp.choices[0].message.content.strip().lstrip("```json").rstrip("```")
+        return json.loads(content).get("actions", [])
+    except Exception as e:
+        print(f"[⚠️] GPT error: {e}")
+        return []
+
+# ─── Execute an Action ────────────────────────────────────────────
+def execute_action(action_cfg: dict):
+    action = action_cfg.get("action")
+    path   = action_cfg.get("path_or_command", "")
+    print(f"[⚙️] Executing '{action}' -> '{path}'")
+    try:
+        if action == "say_time":
+            now = datetime.now().strftime("%H:%M")
+            print(f"[⏰] Current time: {now}")
+        elif action == "subprocess":
+            subprocess.Popen(path.split(), stdout=DEVNULL, stderr=DEVNULL)
+        elif action == "system":
+            subprocess.run(path, shell=True, check=True)
+        elif action == "script":
+            subprocess.run(["bash", path], check=True)
+        else:
+            print(f"[❌] Unknown action '{action}'")
+    except Exception as e:
+        print(f"[⚠️] Execution error: {e}")
+
+# ─── Handle User Command ──────────────────────────────────────────
+def handle_command(user_input: str):
+    actions = get_gpt_actions(user_input)
+    if not actions:
+        print("[❓] No actions returned.")
+        return
+    for act in actions:
+        execute_action(act)
+
+# ─── Entry Point ───────────────────────────────────────────────────
 if __name__ == "__main__":
     load_skills()
     load_py_skills()
