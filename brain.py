@@ -106,28 +106,40 @@ def load_py_skills(pkg_dir="skills_py"):
 
 
 def build_system_prompt():
+
+def build_system_prompt(user_input: str):
     """
-    Construct a system prompt listing all loaded skills for the LLM.
+    Construct a system prompt that injects both recent and relevant memories.
     """
+    # 1) Fetch memory snippets
+    recent   = recall_recent(limit=3)
+    relevant = recall_relevant(query=user_input, limit=3)
+
+    # 2) Format into blocks
+    recent_block = "\n".join(f"- {m}" for m in recent) or "*(no recent memories)*"
+    relevant_block = "\n".join(f"- {m} (score {s:.2f})" for m, s in relevant) \
+                     or "*(no relevant memories)*"
+
+    # 3) Build the prompt
     prompt = (
-        "You are Praetor, an AI brain routing user commands to system actions.\n\n"
-        "Available JSON/DB skills:\n"
+        "You are Praetor, a memory-aware AI assistant.\n\n"
+        "Recent memories (most recent first):\n"
+        f"{recent_block}\n\n"
+        "Contextually relevant memories:\n"
+        f"{relevant_block}\n\n"
+        "Available skills:\n"
     )
+    # append your existing skill list here...
     for skill in SKILL_LIST:
         triggers = skill.get("triggers", [])
         cmd = skill.get("path_or_command", "")
         prompt += f"- {skill['action']}: triggers {triggers}, executes '{cmd}'\n"
 
-    prompt += "\nAvailable Python skills (prefix-match):\n"
-    for key, runner in PY_SKILL_RUNNERS.items():
-        prompt += f"- '{key}' -> module {runner.__module__}\n"
-
     prompt += (
-        "\nRespond with JSON exactly like: {\"actions\": [ {\"action\": ..., \"path_or_command\": ...} ] }"
+        "\nRespond with JSON exactly like: "
+        "{\"actions\": [ {\"action\": ..., \"path_or_command\": ...} ] }"
     )
     return prompt
-
-
 def get_gpt_actions(user_input):
     """
     Ask the LLM to choose actions based on the system prompt and user_input.
