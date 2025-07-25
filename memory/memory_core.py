@@ -45,6 +45,7 @@ def load_all_skills(conn):
     return cursor.fetchall()
 
 def save_message(message: str, namespace: str = "default", conn=None):
+    print(f"[DEBUG] save_message called → namespace={namespace!r}, message={message!r}")
     """
     Persist a message to the messages table.
     """
