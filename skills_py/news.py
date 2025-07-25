@@ -43,8 +43,8 @@ def run_news_fetch():
 
     for article in articles:
         title   = (article.get("title") or "").strip()
-+       summary = (article.get("description") or "").strip()
-+       url     = (article.get("url") or "").strip()
+        summary = (article.get("description") or "").strip()
+        url     = (article.get("url") or "").strip()
         message = f"{title}\n{summary}\n{url}"
 
         save_message(message, namespace="news")
