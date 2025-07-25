@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import os
 import sys
 import json
@@ -8,40 +9,39 @@ from datetime import datetime
 from subprocess import DEVNULL
 
 import openai
-import numpy as np
 
+# ─── Memory Core Imports ───────────────────────────────────────────
+from memory.memory_core import (
+    get_connection,
+    load_all_skills,
+    recall_recent,
+    recall_relevant,
+)
 
-from memory.memory_core import recall_recent, recall_relevant
-import get_connection, load_all_skills
-from skills.weather_skill import get_weather
+# ─── Skill Imports ─────────────────────────────────────────────────
+from skills_py.weather import get_weather  # adjust path if needed
 
-# Memory core imports
-from memory.memory_core import get_connection, load_all_skills
+# ─── Brain-State Constants ────────────────────────────────────────
 from brain_state import COMMANDS, PY_SKILL_RUNNERS, SKILL_LIST
 
-# 1) Init OpenAI key
+# ─── OpenAI Setup ─────────────────────────────────────────────────
 openai.api_key = os.getenv("OPENAI_API_KEY")
+if not openai.api_key:
+    raise RuntimeError("Missing OPENAI_API_KEY environment variable")
 
-# 2) Init your SQLite connection
-conn = get_connection("praetor_memory.db")
+# ─── Initialize Persistent Memory ─────────────────────────────────
+# Ensure database and tables exist
+conn = get_connection()  # uses default path memory/praetor_memory.db
 
-# Initialize persistent memory (SQLite)
-conn = get_connection()
-
-# 3) Preload & cache all trigger embeddings
+# ─── Preload & Cache Trigger Embeddings ───────────────────────────
 TRIGGER_EMBEDDINGS = {}
 for trigger, action, cmd in load_all_skills(conn):
-    resp = openai.Embedding.create(
+    resp = openai.embeddings.create(
         input=[trigger],
         model="text-embedding-ada-002"
     )
-    emb = resp["data"][0]["embedding"]
+    emb = resp.data[0].embedding
     TRIGGER_EMBEDDINGS[trigger] = emb
-
-
-# Shortcut for subprocess silence
-from subprocess import DEVNULL
-
 
 def load_skills(skill_dir="skills"):
     """
