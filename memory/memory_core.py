@@ -59,3 +59,47 @@ def save_message(message: str, namespace: str = "default", conn=None,db_path=DEF
 # ─── auto-create messages table on module import ───────────────────
 # this runs as soon as anything “import memory.memory_core”
 init_db()
+
+def recall_recent(limit: int = 5, conn=None) -> list[str]:
+    """
+    Return the last `limit` messages (most‐recent recency).
+    """
+    conn = conn or get_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT message FROM messages ORDER BY id DESC LIMIT ?", (limit,))
+    return [r["message"] for r in cur.fetchall()]
+
+def recall_relevant(
+    query: str,
+    limit: int = 5,
+    conn=None,
+    embedding_model="text-embedding-ada-002"
+) -> list[tuple[str,float]]:
+    """
+    Embed the query, compute cosine similarity against stored memory embeddings,
+    and return the top‐`limit` messages with their scores.
+    """
+    from openai import Embedding
+    import numpy as np
+
+    conn = conn or get_connection()
+    # 1) embed the query
+    resp = Embedding.create(input=[query], model=embedding_model)
+    q_emb = np.array(resp["data"][0]["embedding"])
+
+    # 2) fetch all stored embeddings and messages
+    cur = conn.cursor()
+    cur.execute("SELECT id, message, embedding FROM messages")
+    rows = cur.fetchall()
+
+    # 3) compute similarity
+    sims = []
+    for row in rows:
+        mem_emb = np.frombuffer(row["embedding"], dtype=np.float32)
+        score = float(np.dot(q_emb, mem_emb) /
+                      (np.linalg.norm(q_emb) * np.linalg.norm(mem_emb)))
+        sims.append((row["message"], score))
+
+    # 4) pick top‐ranked
+    sims.sort(key=lambda x: x[1], reverse=True)
+    return sims[:limit]
