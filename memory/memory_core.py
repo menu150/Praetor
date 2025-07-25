@@ -59,8 +59,8 @@ def save_message(
     conn = conn or get_connection()
     cur  = conn.cursor()
 
-    # 1) Compute embedding for the message
-    resp = openai.Embedding.create(input=[message], model=embedding_model)
+    # 1) Compute embedding for the message (v1 API)
+    resp = openai.embeddings.create(input=[message], model=embedding_model)
     emb  = resp["data"][0]["embedding"]      # this is already a Python list of floats
     blob = sqlite3.Binary(pickle.dumps(emb))
 
@@ -94,8 +94,8 @@ def recall_relevant(
     conn = conn or get_connection()
     cur  = conn.cursor()
 
-    # 1) Embed the query
-    resp = openai.Embedding.create(input=[query], model=embedding_model)
+    # 1) Embed the query (v1 API)
+    resp = openai.embeddings.create(input=[query], model=embedding_model)
     q_emb = resp["data"][0]["embedding"]  # list of floats
 
     # 2) Fetch stored embeddings
