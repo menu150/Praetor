@@ -11,7 +11,7 @@ import openai
 import numpy as np
 
 
-from memory.memory_core import recall_recent, Recall_relevant
+from memory.memory_core import recall_recent, recall_relevant
 import get_connection, load_all_skills
 from skills.weather_skill import get_weather
 
