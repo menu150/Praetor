@@ -44,12 +44,12 @@ def load_all_skills(conn):
     )
     return cursor.fetchall()
 
-def save_message(message: str, namespace: str = "default", conn=None):
+def save_message(message: str, namespace: str = "default", conn=None,db_path=DEFAULT_DB):
     print(f"[DEBUG] save_message called → namespace={namespace!r}, message={message!r}")
     """
     Persist a message to the messages table.
     """
-    conn = conn or get_connection()
+    conn = conn or get_connection(db_path)
     cur = conn.cursor()
     cur.execute(
         "INSERT INTO messages (namespace, timestamp, message) VALUES (?, ?, ?)",
