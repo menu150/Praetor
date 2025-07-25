@@ -9,6 +9,7 @@ from datetime import datetime
 from subprocess import DEVNULL
 
 import openai
+import numpy as np
 
 # ─── Memory Core Imports ───────────────────────────────────────────
 from memory.memory_core import (
@@ -19,7 +20,7 @@ from memory.memory_core import (
 )
 
 # ─── Skill Imports ─────────────────────────────────────────────────
-from skills_py.weather import get_weather  # adjust path if needed
+from skills_py.weather import run as get_weather  # adjust import path if needed
 
 # ─── Brain-State Constants ────────────────────────────────────────
 from brain_state import COMMANDS, PY_SKILL_RUNNERS, SKILL_LIST
@@ -30,28 +31,25 @@ if not openai.api_key:
     raise RuntimeError("Missing OPENAI_API_KEY environment variable")
 
 # ─── Initialize Persistent Memory ─────────────────────────────────
-# Ensure database and tables exist
-conn = get_connection()  # uses default path memory/praetor_memory.db
+conn = get_connection()  # auto-creates DB/tables in memory/praetor_memory.db
 
 # ─── Preload & Cache Trigger Embeddings ───────────────────────────
 TRIGGER_EMBEDDINGS = {}
 for trigger, action, cmd in load_all_skills(conn):
-    resp = openai.embeddings.create(
-        input=[trigger],
-        model="text-embedding-ada-002"
-    )
-    emb = resp.data[0].embedding
-    TRIGGER_EMBEDDINGS[trigger] = emb
+    try:
+        resp = openai.embeddings.create(input=[trigger], model="text-embedding-ada-002")
+        emb_list = resp.data[0].embedding  # list of floats
+        vec = np.array(emb_list, dtype=float)
+        TRIGGER_EMBEDDINGS[trigger] = vec
+    except Exception as e:
+        print(f"[⚠️] Embedding error for '{trigger}': {e}")
 
+# ─── Load JSON/DB Skills ──────────────────────────────────────────
 def load_skills(skill_dir="skills"):
-    """
-    Load JSON-defined skills from disk and from the database.
-    Populates SKILL_LIST and COMMANDS.
-    """
     SKILL_LIST.clear()
     COMMANDS.clear()
 
-    # Load file-based JSON skills
+    # File-based JSON skills
     if os.path.isdir(skill_dir):
         for filename in os.listdir(skill_dir):
             if filename.endswith(".json"):
@@ -60,39 +58,33 @@ def load_skills(skill_dir="skills"):
                     with open(path, "r") as f:
                         skill = json.load(f)
                     SKILL_LIST.append(skill)
-                    for trigger in skill.get("triggers", []):
-                        COMMANDS[trigger.lower()] = {
+                    for trig in skill.get("triggers", []):
+                        COMMANDS[trig.lower()] = {
                             "action": skill["action"],
                             "path_or_command": skill.get("path_or_command", "")
                         }
                 except Exception as e:
                     print(f"[⚠️] Failed to load {filename}: {e}")
 
-    # Load DB-backed skills
+    # DB-backed skills
     for trig, action, cmd in load_all_skills(conn):
         skill = {"triggers": [trig], "action": action, "path_or_command": cmd}
         SKILL_LIST.append(skill)
         COMMANDS[trig.lower()] = {"action": action, "path_or_command": cmd}
 
-    # Precompute embeddings for fuzzy match
+    # Precompute embeddings for fuzzy match on any new triggers
     for trig in list(COMMANDS.keys()):
         if trig not in TRIGGER_EMBEDDINGS:
             try:
-                resp = openai.embeddings.create(
-                    model="text-embedding-3-small",
-                    input=trig
-                )
-                vec = np.array(resp.data[0].embedding)
+                resp = openai.embeddings.create(input=[trig], model="text-embedding-ada-002")
+                emb_list = resp.data[0].embedding
+                vec = np.array(emb_list, dtype=float)
                 TRIGGER_EMBEDDINGS[trig] = vec
             except Exception as e:
                 print(f"[⚠️] Embedding error for '{trig}': {e}")
 
-
+# ─── Load Python Skills ────────────────────────────────────────────
 def load_py_skills(pkg_dir="skills_py"):
-    """
-    Dynamically import Python skills modules under skills_py/.
-    Each module must define `triggers` list and a `run()` function.
-    """
     for finder, name, ispkg in pkgutil.iter_modules([pkg_dir]):
         try:
             module = importlib.import_module(f"{pkg_dir}.{name}")
@@ -104,49 +96,51 @@ def load_py_skills(pkg_dir="skills_py"):
         except Exception as e:
             print(f"[⚠️] Failed to load Python skill '{name}': {e}")
 
+# ─── Build Prompt & Invoke LLM ─────────────────────────────────────
 def build_system_prompt(user_input: str):
-    """
-    Construct a system prompt that injects both recent and relevant memories.
-    """
-    # 1) Fetch memory snippets
     recent   = recall_recent(limit=3)
     relevant = recall_relevant(query=user_input, limit=3)
 
-    # 2) Format into blocks
-    recent_block = "\n".join(f"- {m}" for m in recent) or "*(no recent memories)*"
-    relevant_block = "\n".join(f"- {m} (score {s:.2f})" for m, s in relevant) \
-                     or "*(no relevant memories)*"
+    recent_block = "
+".join(f"- {m}" for m in recent) or "*(no recent memories)*"
+    relevant_block = "
+".join(f"- {m} (score {s:.2f})" for m, s in relevant) or "*(no relevant memories)*"
 
-    # 3) Build the prompt
     prompt = (
-        "You are Praetor, a memory-aware AI assistant.\n\n"
-        "Recent memories (most recent first):\n"
-        f"{recent_block}\n\n"
-        "Contextually relevant memories:\n"
-        f"{relevant_block}\n\n"
-        "Available skills:\n"
+        "You are Praetor, a memory-aware AI assistant.
+
+"
+        "Recent memories (most recent first):
+"
+        f"{recent_block}
+
+"
+        "Contextually relevant memories:
+"
+        f"{relevant_block}
+
+"
+        "Available skills:
+"
     )
-    # append your existing skill list here...
     for skill in SKILL_LIST:
         triggers = skill.get("triggers", [])
-        cmd = skill.get("path_or_command", "")
-        prompt += f"- {skill['action']}: triggers {triggers}, executes '{cmd}'\n"
+        cmd      = skill.get("path_or_command", "")
+        prompt  += f"- {skill['action']}: triggers {triggers}, executes '{cmd}'
+"
 
     prompt += (
-        "\nRespond with JSON exactly like: "
-        "{\"actions\": [ {\"action\": ..., \"path_or_command\": ...} ] }"
+        "
+Respond with JSON exactly like: {\"actions\": [ {\"action\": ..., \"path_or_command\": ...} ] }"
     )
     return prompt
 
-def get_gpt_actions(user_input):
-    """
-    Ask the LLM to choose actions based on the system prompt and user_input.
-    Returns a list of action dicts.
-    """
+
+def get_gpt_actions(user_input: str):
     system_prompt = build_system_prompt(user_input)
     messages = [
-        {"role": "system", "content": system_prompt},
-        {"role": "user",   "content": user_input}
+        {"role": "system",  "content": system_prompt},
+        {"role": "user",    "content": user_input}
     ]
     try:
         resp = openai.chat.completions.create(
@@ -154,26 +148,18 @@ def get_gpt_actions(user_input):
             messages=messages,
             temperature=0
         )
-        content = resp.choices[0].message.content
+        cleaned = resp.choices[0].message.content.strip().lstrip("```json").rstrip("```
+")
+        result  = json.loads(cleaned)
+        return result.get("actions", [])
     except Exception as e:
         print(f"[⚠️] GPT error: {e}")
         return []
 
-    cleaned = content.strip().lstrip("```json").rstrip("```").strip()
-    try:
-        result = json.loads(cleaned)
-        return result.get("actions", [])
-    except json.JSONDecodeError:
-        print(f"[⚠️] Failed to parse GPT JSON: {cleaned}")
-        return []
 
-
-def execute_action(action_cfg):
-    """
-    Execute a single action dict returned by get_gpt_actions().
-    """
+def execute_action(action_cfg: dict):
     action = action_cfg.get("action")
-    path = action_cfg.get("path_or_command", "")
+    path   = action_cfg.get("path_or_command", "")
     print(f"[⚙️] Executing '{action}' -> '{path}'")
     try:
         if action == "say_time":
@@ -191,10 +177,7 @@ def execute_action(action_cfg):
         print(f"[⚠️] Execution error: {e}")
 
 
-def handle_command(user_input):
-    """
-    Top‑level entry: sends user_input to the LLM, then runs all chosen actions.
-    """
+def handle_command(user_input: str):
     actions = get_gpt_actions(user_input)
     if not actions:
         print("[❓] No actions returned.")
@@ -206,4 +189,4 @@ def handle_command(user_input):
 if __name__ == "__main__":
     load_skills()
     load_py_skills()
-    print("[✅] Brain module loaded. Use handle_command() or your API to invoke it.")
+    print("[✅] Brain module loaded. Use handle_command() to invoke.")
