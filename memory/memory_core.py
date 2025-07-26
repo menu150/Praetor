@@ -25,6 +25,8 @@ def init_db(conn=None, db_path=DEFAULT_DB):
             timestamp TEXT,
             message   TEXT,
             embedding BLOB
+            source TEXT,
+            region TEXT
         )
     """)
     cur.execute("""
@@ -54,27 +56,31 @@ def load_all_skills(conn):
     return cursor.fetchall()
 
 # ─── Message Persistence ────────────────────────────────────────────
+
 def save_message(
     message: str,
     namespace: str = "default",
+    source: str = None,
+    region: str = None,
     conn: sqlite3.Connection = None,
     embedding_model: str = "text-embedding-ada-002"
 ):
     """
-    Persist a message + its embedding to the messages table.
+    Persist a message + its embedding to the messages table,
+    along with optional source and region metadata.
     """
     conn = conn or get_connection()
-    cur  = conn.cursor()
+    cur = conn.cursor()
 
     # 1) Compute embedding for the message
     resp = openai.embeddings.create(input=[message], model=embedding_model)
-    emb  = resp.data[0].embedding      # list of floats
+    emb = resp.data[0].embedding
     blob = sqlite3.Binary(pickle.dumps(emb))
 
-    # 2) Insert row
+    # 2) Insert row with metadata
     cur.execute(
-        "INSERT INTO messages (namespace, timestamp, message, embedding) VALUES (?, ?, ?, ?)",
-        (namespace, datetime.utcnow().isoformat(), message, blob)
+        "INSERT INTO messages (namespace, timestamp, message, embedding, source, region) VALUES (?, ?, ?, ?, ?, ?)",
+        (namespace, datetime.utcnow().isoformat(), message, blob, source, region)
     )
     conn.commit()
 
