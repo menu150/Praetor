@@ -2,23 +2,20 @@ import os
 import sqlite3
 import pickle
 from datetime import datetime
-import numpy as np
 import openai
 
-# Constants
+# Default path setup
 BASE_DIR = os.path.dirname(__file__)
 DEFAULT_DB = os.path.join(BASE_DIR, "praetor_memory.db")
-EMBEDDING_MODEL = "text-embedding-ada-002"
 
-# ──────────────────────────────────────────────────────────────────────────────
+# ─────────────────────────────── DB SETUP ───────────────────────────────
 def get_connection(db_path=DEFAULT_DB):
     conn = sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row
-    init_db(conn)  # Ensure schema on connect
+    init_db(conn)  # Ensure tables exist
     return conn
 
-def init_db(conn=None, db_path=DEFAULT_DB):
-    conn = conn or get_connection(db_path)
+def init_db(conn):
     cur = conn.cursor()
     cur.execute("""
         CREATE TABLE IF NOT EXISTS messages (
@@ -30,40 +27,37 @@ def init_db(conn=None, db_path=DEFAULT_DB):
             region TEXT
         )
     """)
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS skills (
+            trigger TEXT PRIMARY KEY,
+            action TEXT,
+            path_or_command TEXT
+        )
+    """)
     conn.commit()
     return conn
 
-# ──────────────────────────────────────────────────────────────────────────────
-def classify_region_from_text(text: str) -> str:
-    """
-    Use GPT to classify the geographic region of this message.
-    Returns: e.g., 'US', 'Europe', 'Global', 'Middle East', 'Asia', etc.
-    """
+# ─────────────────────────────── MEMORY IO ───────────────────────────────
+def infer_region_from_text(text: str) -> str:
+    prompt = f"What region is this news about?\n\n\"\"\"\n{text}\n\"\"\"\nRespond with one region only (e.g. US, Europe, Asia, Middle East, Africa, Latin America, or Global)."
     try:
         resp = openai.chat.completions.create(
-            model="gpt-4o",
-            messages=[
-                {"role": "system", "content": "Classify the dominant geographical region of this news article. Respond with just one region like: US, Europe, Global, Middle East, Asia, Africa, Latin America, etc."},
-                {"role": "user", "content": text}
-            ],
+            model="gpt-4o-mini",
+            messages=[{"role": "user", "content": prompt}],
             temperature=0
         )
-        return resp.choices[0].message.content.strip()
+        region = resp.choices[0].message.content.strip()
+        return region
     except Exception as e:
-        print(f"[⚠️] Region classification failed: {e}")
+        print(f"[⚠️] Failed to infer region: {e}")
         return "Unknown"
 
-# ──────────────────────────────────────────────────────────────────────────────
 def save_message(
     message: str,
     namespace: str = "default",
     conn: sqlite3.Connection = None,
-    embedding_model: str = EMBEDDING_MODEL
+    embedding_model: str = "text-embedding-ada-002"
 ):
-    """
-    Persist a message + its embedding to the messages table.
-    Auto-classifies the message's region using GPT.
-    """
     conn = conn or get_connection()
     cur = conn.cursor()
 
@@ -72,8 +66,8 @@ def save_message(
     emb = resp.data[0].embedding
     blob = sqlite3.Binary(pickle.dumps(emb))
 
-    # 2) Auto classify region
-    region = classify_region_from_text(message)
+    # 2) Classify region
+    region = infer_region_from_text(message)
 
     # 3) Insert
     cur.execute(
@@ -82,42 +76,40 @@ def save_message(
     )
     conn.commit()
 
-# ──────────────────────────────────────────────────────────────────────────────
-def load_all_skills(conn):
-    cur = conn.cursor()
-    cur.execute("SELECT trigger, action, path_or_command FROM skills")
-    return cur.fetchall()
-
 def recall_recent(limit: int = 5, conn=None) -> list[str]:
     conn = conn or get_connection()
     cur = conn.cursor()
     cur.execute("SELECT message FROM messages ORDER BY id DESC LIMIT ?", (limit,))
     return [r["message"] for r in cur.fetchall()]
 
-def recall_relevant(
-    query: str,
-    limit: int = 5,
-    conn=None,
-    embedding_model=EMBEDDING_MODEL
-) -> list[tuple[str, float]]:
-    from openai import embeddings
+def recall_relevant(query: str, limit: int = 5, conn=None, embedding_model="text-embedding-ada-002") -> list[tuple[str, float]]:
+    import numpy as np
     conn = conn or get_connection()
 
-    # Embed query
+    # 1) Query embedding
     resp = openai.embeddings.create(input=[query], model=embedding_model)
     q_emb = np.array(resp.data[0].embedding)
 
-    # Pull embeddings from DB
+    # 2) Fetch memory
     cur = conn.cursor()
-    cur.execute("SELECT message, embedding FROM messages")
+    cur.execute("SELECT id, message, embedding FROM messages")
     rows = cur.fetchall()
 
-    # Cosine similarity
+    # 3) Similarity
     sims = []
     for row in rows:
-        mem_emb = np.frombuffer(pickle.loads(row["embedding"]), dtype=np.float32)
+        mem_emb = pickle.loads(row["embedding"])
         score = float(np.dot(q_emb, mem_emb) / (np.linalg.norm(q_emb) * np.linalg.norm(mem_emb)))
         sims.append((row["message"], score))
 
     sims.sort(key=lambda x: x[1], reverse=True)
     return sims[:limit]
+
+# ─────────────────────────────── SKILLS ───────────────────────────────
+def load_all_skills(conn):
+    cursor = conn.cursor()
+    cursor.execute("SELECT trigger, action, path_or_command FROM skills")
+    return cursor.fetchall()
+
+# Auto-init on import
+init_db(get_connection())
