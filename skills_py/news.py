@@ -1,55 +1,48 @@
-import os
 import requests
-from memory.memory_core import save_message
-from skills_py.summarizer import summarize_rss_item
-from skills_py.news_sources import fetch_global_sources, get_curated_sources
+import os
 
-import logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+NEWS_API_KEY = os.getenv("NEWS_API_KEY")
+BASE_URL = "https://newsapi.org/v2/top-headlines"
+PAGE_SIZE = 25  # Safe value (max is 100)
 
-API_KEY = os.getenv("NEWSAPI_API_KEY")
+def fetch_news_articles(target_count=50, country="us"):
+    articles = []
+    page = 1
 
-if not API_KEY:
-    logger.error("Environment variable NEWSAPI_API_KEY is not set.")
-    raise RuntimeError("Missing NEWSAPI_API_KEY")
+    while len(articles) < target_count:
+        response = requests.get(BASE_URL, params={
+            "apiKey": NEWS_API_KEY,
+            "country": country,
+            "pageSize": PAGE_SIZE,
+            "page": page,
+        })
+        data = response.json()
 
-def run_news_fetch():
-    logger.info("Starting news fetch...")
-    all_sources = list(set(fetch_global_sources() + get_curated_sources()))
+        if data.get("status") != "ok" or not data.get("articles"):
+            break
 
-    for source_id in all_sources:
-        try:
-            logger.info(f"Fetching from source: {source_id}")
-            resp = requests.get(
-                "https://newsapi.org/v2/top-headlines",
-                params={
-                    "apiKey": API_KEY,
-                    "sources": source_id,
-                    "pageSize": 20
-                }
-            )
-            resp.raise_for_status()
-            articles = resp.json().get("articles", [])
+        articles.extend(data["articles"])
 
-            for article in articles:
-                title = (article.get("title") or "").strip()
-                desc = (article.get("description") or "").strip()
-                url = (article.get("url") or "").strip()
+        if len(data["articles"]) < PAGE_SIZE:
+            break  # No more articles available
 
-                if not title:
-                    continue
+        page += 1
 
-                content_to_summarize = f"{title}\n{desc}"
-                summary = summarize_rss_item(content_to_summarize)
-                message = f"{summary}\n\n{url}"
-                save_message(message, namespace="news")
+    return articles[:target_count]
 
-        except Exception as e:
-            logger.warning(f"Failed to fetch from {source_id}: {e}")
+def run():
+    try:
+        print("[📰] Fetching news...")
+        articles = fetch_news_articles()
 
-    logger.info("✅ News fetch complete.")
-    return True
+        # Optional: summarize or store here
+        for i, article in enumerate(articles[:5], 1):  # Preview top 5
+            print(f"{i}. {article['title']} — {article.get('source', {}).get('name')}")
+
+        return {"status": "success", "count": len(articles)}
+    except Exception as e:
+        print(f"[❌] News skill failed: {e}")
+        return {"status": "error", "error": str(e)}
 
 if __name__ == "__main__":
-    run_news_fetch()
+    run()
