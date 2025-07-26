@@ -9,7 +9,7 @@ from .memory_core import (
 
 # ─── auto-create the messages table on import ──────────────────────
 # this runs as soon as anyone does “import memory”
-# init_db()  # Needs conn argument — do not run at import time
+# init_db()  # ⚠️ Disabled — must pass a conn argument manually when needed
 print("🗄️  memory package imported — running init_db()…")
 init_db()
 print("✅  init_db() complete.")
