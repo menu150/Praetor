@@ -1,57 +1,55 @@
-# skills_py/news.py
-
 import os
-import logging
 import requests
-
 from memory.memory_core import save_message
+from skills_py.summarizer import summarize_rss_item
+from skills_py.news_sources import fetch_global_sources, get_curated_sources
 
-# ─── Logger setup ───────────────────────────────────────────────────
+import logging
+logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
-handler = logging.StreamHandler()
-formatter = logging.Formatter("%(asctime)s %(levelname)s: %(message)s")
-handler.setFormatter(formatter)
-logger.addHandler(handler)
-logger.setLevel(logging.INFO)
 
-# ─── Configuration ──────────────────────────────────────────────────
 API_KEY = os.getenv("NEWSAPI_API_KEY")
+
 if not API_KEY:
     logger.error("Environment variable NEWSAPI_API_KEY is not set.")
     raise RuntimeError("Missing NEWSAPI_API_KEY")
 
-NEWS_URL = "https://newsapi.org/v2/top-headlines"
-
-
 def run_news_fetch():
     logger.info("Starting news fetch...")
-    params = {
-        "country": "us",
-        "category": "general",
-        "apiKey": API_KEY
-    }
+    all_sources = list(set(fetch_global_sources() + get_curated_sources()))
 
-    try:
-        response = requests.get(NEWS_URL, params=params)
-        response.raise_for_status()
-    except Exception as e:
-        logger.error(f"Error fetching news: {e}")
-        return
+    for source_id in all_sources:
+        try:
+            logger.info(f"Fetching from source: {source_id}")
+            resp = requests.get(
+                "https://newsapi.org/v2/top-headlines",
+                params={
+                    "apiKey": API_KEY,
+                    "sources": source_id,
+                    "pageSize": 20
+                }
+            )
+            resp.raise_for_status()
+            articles = resp.json().get("articles", [])
 
-    data = response.json()
-    articles = data.get("articles", [])
+            for article in articles:
+                title = (article.get("title") or "").strip()
+                desc = (article.get("description") or "").strip()
+                url = (article.get("url") or "").strip()
 
-    for article in articles:
-        title   = (article.get("title") or "").strip()
-        summary = (article.get("description") or "").strip()
-        url     = (article.get("url") or "").strip()
-        message = f"{title}\n{summary}\n{url}"
+                if not title:
+                    continue
 
-        save_message(message, namespace="news")
-        logger.info(f"Saved article: {title}")
+                content_to_summarize = f"{title}\n{desc}"
+                summary = summarize_rss_item(content_to_summarize)
+                message = f"{summary}\n\n{url}"
+                save_message(message, namespace="news")
 
-    logger.info(f"Fetched and stored {len(articles)} articles.")
+        except Exception as e:
+            logger.warning(f"Failed to fetch from {source_id}: {e}")
 
+    logger.info("✅ News fetch complete.")
+    return True
 
-# List of triggers for the Brain’s dynamic loader
-triggers = ["news", "headlines", "what's in the news"]
+if __name__ == "__main__":
+    run_news_fetch()
