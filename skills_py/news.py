@@ -3,7 +3,7 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 import requests
 
-from praetor.nlp.summarizer import summarize_article  # Update if your function name is different
+from memory.summarizer import summarize_article  # Update if your function name is different
 from memory.memory_core import save_message  # Assumes save_message(conn, source, content, tags)
 from memory.db import get_connection  # Or however you get a DB connection
 
