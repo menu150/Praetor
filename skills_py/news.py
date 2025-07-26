@@ -1,30 +1,38 @@
-import requests
 import os
+import requests
+
+from praetor.nlp.summarizer import summarize_article  # Update if your function name is different
+from memory.memory_core import save_message  # Assumes save_message(conn, source, content, tags)
+from memory.db import get_connection  # Or however you get a DB connection
 
 NEWS_API_KEY = os.getenv("NEWS_API_KEY")
 BASE_URL = "https://newsapi.org/v2/top-headlines"
-PAGE_SIZE = 25  # Safe value (max is 100)
+PAGE_SIZE = 25  # Max 100 per page, 25 for safer pagination
 
 def fetch_news_articles(target_count=50, country="us"):
     articles = []
     page = 1
 
     while len(articles) < target_count:
-        response = requests.get(BASE_URL, params={
+        res = requests.get(BASE_URL, params={
             "apiKey": NEWS_API_KEY,
             "country": country,
             "pageSize": PAGE_SIZE,
             "page": page,
         })
-        data = response.json()
+        data = res.json()
 
-        if data.get("status") != "ok" or not data.get("articles"):
+        if data.get("status") != "ok":
+            print(f"[❌] Error from NewsAPI: {data}")
             break
 
-        articles.extend(data["articles"])
+        fetched = data.get("articles", [])
+        if not fetched:
+            break
 
-        if len(data["articles"]) < PAGE_SIZE:
-            break  # No more articles available
+        articles.extend(fetched)
+        if len(fetched) < PAGE_SIZE:
+            break
 
         page += 1
 
@@ -32,14 +40,30 @@ def fetch_news_articles(target_count=50, country="us"):
 
 def run():
     try:
-        print("[📰] Fetching news...")
+        print("[📰] Fetching up to 50 news articles...")
         articles = fetch_news_articles()
 
-        # Optional: summarize or store here
-        for i, article in enumerate(articles[:5], 1):  # Preview top 5
-            print(f"{i}. {article['title']} — {article.get('source', {}).get('name')}")
+        conn = get_connection()
+        stored = 0
 
-        return {"status": "success", "count": len(articles)}
+        for article in articles:
+            title = article.get("title", "")
+            description = article.get("description", "")
+            content = f"{title}\n\n{description}"
+            if not content.strip():
+                continue
+
+            summary = summarize_article(content)
+            if not summary:
+                continue
+
+            # Store summary into memory
+            save_message(conn, source="news", content=summary, tags=["news", "summary"])
+            stored += 1
+
+        print(f"[✅] Fetched {len(articles)} articles, stored {stored} summaries to memory.")
+        return {"status": "success", "fetched": len(articles), "stored": stored}
+
     except Exception as e:
         print(f"[❌] News skill failed: {e}")
         return {"status": "error", "error": str(e)}
