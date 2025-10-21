@@ -5,7 +5,7 @@ import subprocess
 import os
 import signal  # (in case remote added clean shutdown logic)
 
-porcupine = pvporcupine.create(keywords=["computer"])  # We'll customize this next
+porcupine = pvporcupine.create(keywords=["computer"])  # using 'computer' as the wake word
 
 pa = pyaudio.PyAudio()
 stream = pa.open(
